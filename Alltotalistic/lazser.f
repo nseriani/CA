@@ -10,9 +10,9 @@ CCC Originally developed in May 2016
       dimension ipopulation(1000000)
 
       call init(idimension, latticetype, neighbourhood, nneigh, 
-     &   irealsize, ruletype, ictilde, icrule, nstep, nprint, ipopulation)
+     & irealsize, ruletype, ictilde, icrule, nstep, nprint, ipopulation)
 
-      call cellular(neighbourhood, nneigh, irealsize, ruletype, ictilde, 
+      call cellular(neighbourhood, nneigh, irealsize, ruletype, ictilde,
      &   icrule, nstep, nprint, ipopulation)
 
       end

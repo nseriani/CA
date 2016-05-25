@@ -3,7 +3,7 @@ CCC By Paolo Lazzari and Nicola Seriani
 CCC Originally developed in May 2016
 
       subroutine init(idimension, latticetype, neighbourhood, nneigh, 
-     &     irealsize, ruletype, ictilde, icrule, nstep, nprint, ipopulation) 
+     & irealsize, ruletype, ictilde, icrule, nstep, nprint, ipopulation) 
       implicit real*8(a-h,o-z)
       character(3) latticetype, latticetypes, latticetyper
       character(10) seedfile, rulefile, neighbourhood 

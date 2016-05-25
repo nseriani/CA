@@ -43,6 +43,7 @@ LIBCOMMON =
 LIBTRAJ = 	lazser.o \
 		init.o \
                 scvonneumann.o \
+                cellular.o \
                 scmoore.o
 
 lazser.x : $(LIBCOMMON) $(LIBTRAJ)
