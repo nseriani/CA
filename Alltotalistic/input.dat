@@ -1,0 +1,19 @@
+&files 
+    seedfile='seed.in'
+    rulefile='rule.in'
+  /
+&control
+    calculation = 'relax',
+ /
+&lattice
+!    idimension=3
+    latticetype = 'sc'
+! 'fcc', 'sc'
+    neighbourhood='vonneumann'
+!'moore' 'vonneumann'
+    isize = 10
+ /    
+&steps
+  nstep = 12
+  nprint = 6
+ /
