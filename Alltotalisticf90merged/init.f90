@@ -12,8 +12,8 @@
 !     Local variables
 !     implicit real*8(a-h,o-z)
       integer           :: i,j
-      character(10)     :: seedfile, rulefile, neighbourhood 
-      character(10)     :: seedtype, ruletype
+      character(20)     :: seedfile, rulefile, neighbourhood 
+      character(20)     :: seedtype, ruletype
       character(3)      :: latticetype, latticetypes, latticetyper
       integer           :: isize,nseed
       integer           :: irule(2,30)

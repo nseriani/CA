@@ -1,6 +1,6 @@
 &files 
-    seedfile='seed.in'
-    rulefile='rule.in'
+    seedfile='SEED/seed.in'
+    rulefile='RULE/rule.in'
   /
 &control
     calculation = 'relax',
