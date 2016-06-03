@@ -1,0 +1,3 @@
+ sc        Lattice type
+ generic     Type of rule: generic, totalistic, outer (totalistic)
+ For generic, the whole rule must be specified... To be seen how...
