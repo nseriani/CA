@@ -1,6 +1,12 @@
       subroutine scmoore(isize, neighlist)
-      implicit real*8(a-h,o-z)
-      dimension neighlist(1000000, 30)
+      implicit none
+!     implicit real*8(a-h,o-z)
+      integer    ::  isize
+      integer    ::  neighlist(1000000, 30)
+!     
+      integer    :: i1,i2,i3
+      integer    :: j,j2
+      integer    :: kk,k1,k2
       do i1 =2, isize-1
         do i2 =2, isize-1
           do i3 =2, isize-1

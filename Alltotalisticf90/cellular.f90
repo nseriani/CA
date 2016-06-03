@@ -4,7 +4,8 @@
 
       subroutine cellular(neighbourhood, nneigh, irealsize, ruletype,&
                           ictilde,icrule, nstep, nprint, ipopulation)
-      implicit real*8(a-h,o-z)
+      implicit none
+!     implicit real*8(a-h,o-z)
       integer                     :: idimension, nneigh, irealsize,ictilde, icrule, nstep, nprint
       character(3)                :: latticetype
       character(10)               :: neighbourhood 
