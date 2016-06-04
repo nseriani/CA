@@ -16,6 +16,7 @@ IMOPTFLAGS = -g0
 IDEBUGFLAGS = -g -C -debug extended -debug inline_debug_info -traceback 
 IFC = ifort 
 ILDFLAGS = #-lg2c
+Cdim = 3
 #
 
 SETARCH = LAPTOP
@@ -54,6 +55,8 @@ lazser.x : $(LIBCOMMON) $(LIBTRAJ)
 .f.o:
 	$(FC) $(FLAGS) $(ARCHFLAGS)$(ARCH) -c $<
 %.o: %.F90
+	./define_array.py   ${Cdim} > define_array.h
+	./allocate_array.py ${Cdim} > allocate_array.h
 	$(FC) $(CPPDEFS) $(CPPFLAGS) $(FFLAGS) -c $< 
 .f90.o:
 	$(FC) $(FLAGS) $(ARCHFLAGS)$(ARCH) -c $<

@@ -4,6 +4,52 @@ USE latticemem
 implicit none
 
 contains
+
+subroutine compute_nearneighbour(CA_dom)
+   implicit none
+type(domain)      :: CA_dom
+! Local variables
+character(20)     :: diagnostic
+
+   SELECT CASE (TRIM(CA_dom%latticetype))
+      CASE('SC','sc')
+
+           SELECT CASE (TRIM(CA_dom%neighbourhood))
+
+              CASE('vonneumann','vonNeumann')
+                  call compute_von_Neumann(CA_dom)
+
+              CASE('moore','Moore')
+                  call compute_Moore(CA_dom)
+
+              CASE('honeycomb','Honeycomb','HC')
+                  call compute_Honeycomb(CA_dom)
+
+              CASE DEFAULT
+                  write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
+                  STOP 
+
+           END SELECT
+          
+      CASE('FCC','fcc')
+
+           SELECT CASE (TRIM(CA_dom%neighbourhood))
+
+              CASE('moore','Moore')
+                  call compute_FCC(CA_dom)
+
+              CASE DEFAULT
+                  write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
+                  STOP 
+
+           END SELECT
+
+      CASE DEFAULT
+
+           write(*,*) 'Lattice: '//TRIM(CA_dom%latticetype)//' not implemented' 
+           STOP 
+   END SELECT
+end subroutine
 !--------von Neumann----------!
 !     ________________________________
 !     |     |     |     |     |     |

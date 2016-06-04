@@ -39,24 +39,17 @@
         CA_dom%latticetype   = latticetype
         CA_dom%neighbourhood = neighbourhood
         CA_dom%isize         = isize
+
         write(*,*) 'Type of lattice: ', CA_dom%latticetype
         write(*,*) 'Type of neighbourhood: ', CA_dom%neighbourhood
-        if(idimension.ne.CA_dom%D) STOP 'Wrong dimension -check with value at compilation time'
+
+        if(idimension.ne.CA_dom%D) STOP 'Wrong dimension - check&
+                                   with value at compilation time'
 
       call allocate_dom(CA_dom)
 
-      if(CA_dom%neighbourhood.ne.'vonneumann'.and. CA_dom%neighbourhood.ne.'moore')    STOP 'Wrong neighbourhood'
+      call compute_nearneighbour(CA_dom)
 
-      if(latticetype.eq.'sc'.and.neighbourhood.eq.'vonneumann') then
-          call compute_von_Neumann(CA_dom1)
-      elseif(latticetype.eq.'sc'.and.neighbourhood.eq.'moore') then
-          call compute_moore(CA_dom1)
-      elseif(latticetype.eq.'fcc') then
-          call compute_FCC(CA_dom1)
-      else
-         STOP 'No neighbours for this lattice-neighbourhood'
-      endif
- 
       read(11,nml=steps)
 
 !   Read and initialize the seed
