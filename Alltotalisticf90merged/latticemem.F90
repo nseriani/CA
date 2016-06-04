@@ -6,12 +6,16 @@ INTEGER                               :: isize    ! length of N-dimensional cube
 INTEGER                               :: S        ! Size of the vectorized domain
 CHARACTER (LEN=10)                    :: latticetype
 CHARACTER (LEN=30)                    :: neighbourhood
+LOGICAL                               :: shiftby1 ! Shift by 1 the lattice FCC
 INTEGER                               :: nneigh       ! number of near nieghbours
 INTEGER, allocatable, dimension(:,:)  :: v1DtoND  ! map of 1D to ND
 INTEGER, allocatable, dimension(:,:)  :: neighlist      ! matrix of vectorized nearneighbours
 end type domain
 
 type(domain),save                     :: CA_dom1
+REAL   , parameter                    :: PI=acos(-1.)
+REAL(4), allocatable, dimension(:,:)  :: examap
+LOGICAL, allocatable, dimension(:)    :: v_aux
 
 contains
 
@@ -21,7 +25,7 @@ type(domain)                       :: CA_dom
 ! local variable
 integer   :: i,j
 integer   :: L,D
-INTEGER, allocatable, dimension(:)    :: v        ! state_vector
+INTEGER, allocatable, dimension(:)    :: v        ! auxiliary index vector
 
 
 D = CA_dom%D
@@ -71,6 +75,7 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
        CA_dom%m = UNPACK(v,CA_dom%n == 1,CA_dom%n) ! D-dimensional matrix of indexes
 
+       if (CA_dom%shiftby1)  CA_dom%m = -CA_dom%m + 1 ! Zero cells became 1 and viceversa
 
    CASE DEFAULT
 
@@ -110,9 +115,25 @@ OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRIT
 
     write(unit=333,FMT=*) CA_dom%S
     write(unit=333,FMT=*) 
-do i=1,CA_dom%S
-    write(unit=333,FMT=*) "Au", CA_dom%v1DtoND(i,:)
-enddo
+
+SELECT CASE (CA_dom%latticetype)
+
+     CASE('Honeycomb','honeycomb','hc')
+         allocate(examap(CA_dom%S,2))
+         allocate(v_aux(CA_dom%S))
+         examap = 0.
+         v_aux  = .FALSE.
+         call create_exa(CA_dom,1,0.,0.)
+         do i=1,CA_dom%S
+             write(unit=333,FMT=*) 'Au', examap(i,1),examap(i,2), CA_dom%v1DtoND(i,3:CA_dom%D)
+         enddo
+
+     CASE DEFAULT
+         do i=1,CA_dom%S
+             write(unit=333,FMT=*) 'Au', CA_dom%v1DtoND(i,:)
+         enddo
+
+END SELECT
 
 CLOSE(UNIT=333)
 
@@ -126,6 +147,36 @@ deallocate(CA_dom%m)
 deallocate(CA_dom%n)
 deallocate(CA_dom%v1DtoND)
 deallocate(CA_dom%neighlist)
+
+end subroutine
+recursive subroutine create_exa(CA_dom,point0,x0,y0)
+implicit none
+type(domain)   :: CA_dom
+integer    :: i,point0,point
+real(4)    :: x0,y0
+real(4)    :: x,y
+
+if (point0 .eq. 0) then
+   return
+elseif (v_aux(point0)) then
+   return
+else
+   v_aux(point0)    = .TRUE.
+   examap(point0,1) = x0
+   examap(point0,2) = y0
+   do i =1,6
+        point = CA_dom%neighlist(point0,i)
+        x     = x0 + cos(-2*PI/6.*real(i-1) + 5./6. * PI )
+        y     = y0 + sin(-2*PI/6.*real(i-1) + 5./6. * PI )
+       call create_exa(CA_dom,point,x,y)
+   enddo
+   do i =7,CA_dom%nneigh
+        point = CA_dom%neighlist(point0,i)
+        x     = x0 
+        y     = y0 
+       call create_exa(CA_dom,point,x,y)
+   enddo
+endif
 
 end subroutine
 

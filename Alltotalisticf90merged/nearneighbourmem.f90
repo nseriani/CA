@@ -36,6 +36,7 @@ character(20)     :: diagnostic
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
               CASE('moore','Moore')
+                  CA_dom%shiftby1 = .FALSE.
                   call compute_FCC(CA_dom)
 
               CASE DEFAULT
