@@ -70,6 +70,7 @@
 
       call init_seed(CA_dom,CA_state,CA_seed)
 
+      call dump_state(CA_dom,CA_state)
 !   Read the rule
       open(12,file=rulefile)
       read(12,*) latticetyper

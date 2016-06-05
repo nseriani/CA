@@ -28,14 +28,17 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
 
       read(12,*) CA_seed%nseed
 
-      allocate(CA_seed%idxr(CA_seed%nseed,CA_dom%D))
-      allocate(CA_seed%idx (CA_seed%nseed,CA_dom%D))
+      allocate(CA_seed%idxr   (CA_seed%nseed,CA_dom%D))
+      allocate(CA_seed%idx    (CA_seed%nseed,CA_dom%D))
+      allocate(CA_seed%origin (CA_dom%D))
 
       read(12,*) CA_seed%latticetype, CA_seed%stype
       read(12,*) CA_seed%origin_type, CA_seed%origin(:)
 
+      write(*,*) 'Seed file: ',CA_seed%seedfile
       write(*,*) 'Number of cells in the seed: ',CA_seed%nseed
       write(*,*) 'From seed file: ',CA_seed%latticetype,'  ', CA_seed%stype
+      write(*,*) 'Seed origin type: ',CA_seed%origin_type,' Seed origin position ', CA_seed%origin(:)
 
       if(CA_dom%latticetype.ne.CA_seed%latticetype)  STOP 'Seed lattice different from input lattice'
 
@@ -81,6 +84,9 @@ subroutine seed_in_state(CA_dom,CA_state,CA_seed)
 
       enddo
    enddo
+
+   if (minval(checker) .EQ. 0) STOP 'seed: point in seed not positioned in lattice'
+   if (maxval(checker) .GT. 1) STOP 'seed: point redundant definition'
 end subroutine
 
 function  match(CA_dom,j,CA_seed,i)
@@ -94,7 +100,12 @@ function  match(CA_dom,j,CA_seed,i)
    
    match = .TRUE.
    do k =1, CA_dom%D
-      shifted = CA_seed%idx(i,k) + CA_seed%origin(k)
+      SELECT CASE (CA_seed%origin_type)
+         CASE('manual')
+             shifted = CA_seed%idx(i,k) + CA_seed%origin(k)
+         CASE('center')
+             shifted = CA_seed%idx(i,k) + CA_dom%isize/2
+      END SELECT
       if (CA_dom%v1DtoND(j,k) .NE. shifted) match = .FALSE.
    enddo
 end function
