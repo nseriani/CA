@@ -27,7 +27,7 @@ implicit none
 !local variables
 type(domain)   :: CA_dom
 type(state )   :: CA_state
-integer        :: i,j
+integer        :: i
 logical        :: isOccupied
 character(len=1024)  :: filename
 character(len=1024)  :: cube_side

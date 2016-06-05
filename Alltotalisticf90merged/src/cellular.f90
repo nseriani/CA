@@ -2,14 +2,14 @@
 !   By Paolo Lazzari and Nicola Seriani
 !   Originally developed in May 2016
 
-      subroutine cellular(neighbourhood, nneigh, irealsize, ruletype,&
-                          ictilde,icrule, nstep, nprint, ipopulation)
+      subroutine cellular(CA_dom, CA_state, CA_rule)
+      use latticemem
+      use statemem
+      use rulemem
+      use globalmem
       implicit none
-!     implicit real*8(a-h,o-z)
-      integer                     :: idimension, nneigh, irealsize,ictilde, icrule, nstep, nprint
-      character(3)                :: latticetype
-      character(10)               :: neighbourhood 
-      character(10)               :: ruletype
-      integer, dimension(1000000) :: ipopulation, ipop
-
+      type(domain)         :: CA_dom
+      type(state )         :: CA_state
+      type(rule  )         :: CA_rule
+!     Local variabiles
       end

@@ -45,6 +45,8 @@ LIBTRAJ = 	latticemem.o \
 		nearneighbourmem.o \
 		statemem.o \
 		seedmem.o \
+		rulemem.o \
+                globalmem.o \
                 scvonneumann.o \
                 cellular.o \
                 scmoore.o\

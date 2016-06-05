@@ -1,5 +1,5 @@
 &files 
-    seedfile='../SEED/seed.in'
+    seedfile='../SEED/seedpaolo.in'
     rulefile='../RULE/rule.in'
   /
 &control
@@ -11,7 +11,7 @@
 ! 'fcc', 'sc'
     neighbourhood='vonneumann'
 !'moore' 'vonneumann'
-    isize = 10
+    isize = 100
  /    
 &steps
   nstep = 12

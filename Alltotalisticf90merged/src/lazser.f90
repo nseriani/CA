@@ -6,17 +6,18 @@
       use latticemem             
       use statemem             
       use seedmem             
+      use rulemem             
       implicit none
-! Local variables
-      integer                     :: idimension, nneigh, irealsize, ictilde, icrule, nstep, nprint
-      character(3)                :: latticetype
-      character(10)               :: neighbourhood 
-      character(10)               :: ruletype
-      integer, dimension(1000000) :: ipopulation
+! local variables
+      character(20)        :: filein
 
-      call init(CA_dom1, CA_state1, CA_seed1, ruletype, ictilde, icrule, nstep, nprint)
+      filein = 'input.dat' 
 
-      call cellular(neighbourhood, nneigh, irealsize, ruletype, ictilde, &
-                    icrule, nstep, nprint, ipopulation)
+      call init(filein, CA_dom1, CA_state1, CA_seed1, CA_rule1)
 
+      call cellular(CA_dom1, CA_state1, CA_rule1)
+
+!     call finalize(CA_dom1, CA_state1, CA_seed1, CA_rule1)
+
+      write(*,*) 'End of calculation. Good bye.'
       end

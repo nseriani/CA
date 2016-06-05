@@ -9,7 +9,6 @@ subroutine compute_nearneighbour(CA_dom)
    implicit none
 type(domain)      :: CA_dom
 ! Local variables
-character(20)     :: diagnostic
 
    SELECT CASE (TRIM(CA_dom%latticetype))
       CASE('SC','sc')
@@ -109,7 +108,7 @@ subroutine compute_Moore(CA_dom)
    implicit none
 type(domain)                       :: CA_dom
 !Local variables
-   INTEGER                          :: i,j,a,res,NNMo
+   INTEGER                          :: i,j,a,res
    INTEGER,DIMENSION(CA_dom%D)      :: move                      
 
    CA_dom%nneigh=3**CA_dom%D-1   ! Moore 
