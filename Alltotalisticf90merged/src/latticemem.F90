@@ -6,7 +6,8 @@ INTEGER                               :: isize    ! length of N-dimensional cube
 INTEGER                               :: S        ! Size of the vectorized domain
 CHARACTER (LEN=10)                    :: latticetype
 CHARACTER (LEN=30)                    :: neighbourhood
-LOGICAL                               :: shiftby1 ! Shift by 1 the lattice FCC
+logical                               :: checkseed ! check flag for consistency with seed
+LOGICAL                               :: shiftby1 = .FALSE.! Shift by 1 the lattice FCC
 INTEGER                               :: nneigh       ! number of near nieghbours
 INTEGER, allocatable, dimension(:,:)  :: v1DtoND  ! map of 1D to ND
 INTEGER, allocatable, dimension(:,:)  :: neighlist      ! matrix of vectorized nearneighbours
@@ -51,10 +52,7 @@ SELECT CASE (TRIM(CA_dom%latticetype))
    CASE('FCC','fcc')
 
 
-       write(*,*) 'FCC'
-
        CA_dom%n = 0
-       write(*,*) shape(CA_dom%n)
 
        do i=1,D
           CA_dom%m = 0
@@ -97,6 +95,61 @@ enddo
 
 
 deallocate(v)
+
+end subroutine
+
+subroutine check_lattice_vs_seed(CA_dom,seedfile)
+   implicit none
+   type(domain)  :: CA_dom
+   logical       :: check_seed
+   character(30) :: seedfile
+! local variables
+   integer       :: nseed
+   CHARACTER(30) :: origin_type
+   integer       :: origin(CA_dom%D)
+   real(8)       :: idxr(CA_dom%D)
+   character(30) :: aux,aux1
+   logical       :: match
+   integer       :: k,shifted(CA_dom%D)
+
+   SELECT CASE (TRIM(CA_dom%latticetype))
+      CASE('FCC','fcc')
+          open(12,file=TRIM(seedfile))
+
+          read(12,*) nseed
+          read(12,*) aux, aux1
+          read(12,*) origin_type, origin(:)
+
+          read(12,*) idxr(:)
+
+          close(12)
+
+          match = .FALSE.
+   
+          SELECT CASE (origin_type)
+
+                CASE('manual')
+                  shifted(:) = int(idxr(:)) + origin(:)
+
+                CASE('center')
+                   shifted = int(idxr(:)) + CA_dom%isize/2
+
+          END SELECT
+
+          do k =1, CA_dom%S
+
+              IF(ALL(CA_dom%v1DtoND(k,:).EQ.shifted)) match = .TRUE.
+
+          enddo
+
+          if ( .NOT. match ) then
+               write(*,*) 'shift fcc'
+              call deallocate_dom(CA_dom)
+              CA_dom%shiftby1=.TRUE.
+              call allocate_dom(CA_dom)  
+          endif
+
+   END SELECT 
 
 end subroutine
 
@@ -143,12 +196,13 @@ subroutine deallocate_dom(CA_dom)
 implicit none
 type(domain)   :: CA_dom
 
-deallocate(CA_dom%m)
-deallocate(CA_dom%n)
-deallocate(CA_dom%v1DtoND)
-deallocate(CA_dom%neighlist)
+if ( allocated(CA_dom%m))         deallocate(CA_dom%m)
+if ( allocated(CA_dom%n))         deallocate(CA_dom%n)
+if ( allocated(CA_dom%v1DtoND))   deallocate(CA_dom%v1DtoND)
+if ( allocated(CA_dom%neighlist)) deallocate(CA_dom%neighlist)
 
 end subroutine
+
 recursive subroutine create_exa(CA_dom,point0,x0,y0)
 implicit none
 type(domain)   :: CA_dom

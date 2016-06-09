@@ -51,10 +51,12 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
 !   Now use this to initialize the array...
       SELECT CASE (CA_seed%stype)
           CASE ('indices')
-               CA_seed%idx = int(CA_seed%idxr)
-               call seed_in_state(CA_dom,CA_state,CA_seed)
+            CA_seed%idx = int(CA_seed%idxr)
+            call seed_in_state_ind(CA_dom,CA_state,CA_seed)
+
           CASE('xyz') 
-               STOP 'seedtype = xyz not implemented yet'
+            CA_seed%idx = int(CA_seed%idxr)
+            call seed_in_state_xyz(CA_dom,CA_state,CA_seed)
 
           CASE DEFAULT
                STOP 'Wrong seedtype'
@@ -63,7 +65,26 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
 !   End of seed initialization
 end subroutine
 
-subroutine seed_in_state(CA_dom,CA_state,CA_seed)
+subroutine seed_in_state_ind(CA_dom,CA_state,CA_seed)
+   implicit none
+   type(domain) :: CA_dom
+   type(state ) :: CA_state
+   type(seed  ) :: CA_seed
+! local variables
+   integer      :: i,j,k,n,m
+
+   do n =1, CA_seed%nseed
+      i = CA_seed%idx(n,1) + CA_seed%origin(1)
+      j = CA_seed%idx(n,2) + CA_seed%origin(2)
+      k = CA_seed%idx(n,3) + CA_seed%origin(3)
+      m = (i-1)*CA_dom%isize
+      m = (m+j-1)*CA_dom%isize+k
+      CA_state%ipopulation(m)=1
+   enddo
+
+end subroutine
+
+subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
    implicit none
    type(domain) :: CA_dom
    type(state ) :: CA_state

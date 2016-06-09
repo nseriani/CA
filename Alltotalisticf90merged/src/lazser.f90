@@ -9,7 +9,7 @@
       use rulemem             
       implicit none
 ! local variables
-      character(20)        :: filein
+      character(100)        :: filein
 
       filein = 'input.dat' 
 

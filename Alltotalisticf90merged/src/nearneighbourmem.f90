@@ -34,7 +34,7 @@ type(domain)      :: CA_dom
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
-              CASE('moore','Moore')
+              CASE('vonneumann','vonNeumann')
                   CA_dom%shiftby1 = .FALSE.
                   call compute_FCC(CA_dom)
 

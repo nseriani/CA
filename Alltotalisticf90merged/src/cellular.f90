@@ -12,4 +12,7 @@
       type(state )         :: CA_state
       type(rule  )         :: CA_rule
 !     Local variabiles
+
+      call dump_state(CA_dom,CA_state)
+
       end
