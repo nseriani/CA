@@ -11,7 +11,7 @@ type(domain)      :: CA_dom
 ! Local variables
 
    SELECT CASE (TRIM(CA_dom%latticetype))
-      CASE('SC','sc')
+      CASE('sc')
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
@@ -30,7 +30,7 @@ type(domain)      :: CA_dom
 
            END SELECT
           
-      CASE('FCC','fcc')
+      CASE('fcc')
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 

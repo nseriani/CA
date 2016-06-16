@@ -37,10 +37,8 @@ L = CA_dom%isize
 
 SELECT CASE (TRIM(CA_dom%latticetype))
 
-   CASE('SC','sc')
+   CASE('sc')
  
-       write(*,*) 'SC'
-
        CA_dom%S=CA_dom%isize**CA_dom%D
 
        allocate(v(CA_dom%S))
@@ -49,7 +47,7 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
        CA_dom%m=UNPACK(v,CA_dom%m==CA_dom%m,CA_dom%m)! D-dimensional matrix of indexes
 
-   CASE('FCC','fcc')
+   CASE('fcc')
 
 
        CA_dom%n = 0
@@ -77,7 +75,7 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
    CASE DEFAULT
 
-       STOP     'Lattice not understood, select SC or FCC'
+       STOP     'Lattice not understood, select sc or fcc'
 
 END SELECT
 
@@ -113,7 +111,7 @@ subroutine check_lattice_vs_seed(CA_dom,seedfile)
    integer       :: k,shifted(CA_dom%D)
 
    SELECT CASE (TRIM(CA_dom%latticetype))
-      CASE('FCC','fcc')
+      CASE('fcc')
           open(12,file=TRIM(seedfile))
 
           read(12,*) nseed
