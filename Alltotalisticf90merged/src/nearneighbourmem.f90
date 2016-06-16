@@ -15,13 +15,13 @@ type(domain)      :: CA_dom
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
-              CASE('vonneumann','vonNeumann')
+              CASE('vonneumann')
                   call compute_von_Neumann(CA_dom)
 
-              CASE('moore','Moore')
+              CASE('moore')
                   call compute_Moore(CA_dom)
 
-              CASE('honeycomb','Honeycomb','HC')
+              CASE('honeycomb')
                   call compute_Honeycomb(CA_dom)
 
               CASE DEFAULT
@@ -34,7 +34,7 @@ type(domain)      :: CA_dom
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
-              CASE('vonneumann','vonNeumann')
+              CASE('vonneumann')
                   CA_dom%shiftby1 = .FALSE.
                   call compute_FCC(CA_dom)
 
