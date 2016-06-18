@@ -55,6 +55,9 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
 
         if(idimension.ne.CA_dom%D) STOP 'Wrong dimension - check with value at compilation time'
 
+        if ( CA_dom%latticetype .EQ. 'fcc') then
+           if (CA_dom%D .ne. 3) STOP 'wrong dimension - fcc valid only for 3D lattice'
+        endif 
 
       read(11,nml=steps)
       
