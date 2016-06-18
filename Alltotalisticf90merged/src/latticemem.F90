@@ -37,7 +37,7 @@ L = CA_dom%isize
 
 SELECT CASE (TRIM(CA_dom%latticetype))
 
-   CASE('sc')
+   CASE('sc','hc')
  
        CA_dom%S=CA_dom%isize**CA_dom%D
 
@@ -75,7 +75,7 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
    CASE DEFAULT
 
-       STOP     'Lattice not understood, select sc or fcc'
+       STOP     'Lattice not understood, select sc, hc or fcc'
 
 END SELECT
 
@@ -169,7 +169,9 @@ OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRIT
 
 SELECT CASE (CA_dom%latticetype)
 
-     CASE('Honeycomb','honeycomb','hc')
+     CASE('hc')
+         if ( allocated(examap))        deallocate(examap)
+         if ( allocated(v_aux))         deallocate(v_aux)
          allocate(examap(CA_dom%S,2))
          allocate(v_aux(CA_dom%S))
          examap = 0.

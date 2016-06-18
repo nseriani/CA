@@ -42,7 +42,9 @@ OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRIT
 
 SELECT CASE (CA_dom%latticetype)
 
-     CASE('Honeycomb','honeycomb','hc')
+     CASE('hc')
+         if ( allocated(examap))        deallocate(examap)
+         if ( allocated(v_aux))         deallocate(v_aux)
          allocate(examap(CA_dom%S,2))
          allocate(v_aux(CA_dom%S))
          examap = 0.

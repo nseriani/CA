@@ -11,6 +11,7 @@ type(domain)      :: CA_dom
 ! Local variables
 
    SELECT CASE (TRIM(CA_dom%latticetype))
+
       CASE('sc')
 
            SELECT CASE (TRIM(CA_dom%neighbourhood))
@@ -21,7 +22,18 @@ type(domain)      :: CA_dom
               CASE('moore')
                   call compute_Moore(CA_dom)
 
-              CASE('honeycomb')
+              CASE DEFAULT
+                  write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
+                  STOP 
+
+           END SELECT
+
+      CASE('hc')
+
+           SELECT CASE (TRIM(CA_dom%neighbourhood))
+
+              CASE('vonneumann')
+
                   call compute_Honeycomb(CA_dom)
 
               CASE DEFAULT
