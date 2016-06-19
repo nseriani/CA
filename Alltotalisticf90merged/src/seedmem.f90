@@ -40,14 +40,14 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
       write(*,*) 'From seed file: ',CA_seed%latticetype,'  ', CA_seed%stype
       write(*,*) 'Seed origin type: ',CA_seed%origin_type,' Seed origin position ', CA_seed%origin(:)
 
-      if(CA_dom%latticetype.ne.CA_seed%latticetype)  STOP 'Seed lattice different from input lattice'
+      if(CA_dom%latticetype.ne.CA_seed%latticetype)  STOP 'Seed lattice different from input lattice.'
 
       if(CA_seed%stype.eq.'indices') then
-          if (CA_dom%D .ne. 3) STOP 'indices seed valid only with 3D lattice'
+          if (CA_dom%D .ne. 3) STOP 'indices seed format valid only with 3D lattice, try with xyz.'
       endif
 
       if(CA_seed%stype.eq.'indices') then
-          if (CA_seed%latticetype .ne. 'sc') STOP 'indices seed valid only with sc lattice'
+          if (CA_seed%latticetype .ne. 'sc') STOP 'indices seed format valid only with sc lattice, try with xyz.'
       endif
 
       do i =1, CA_seed%nseed
