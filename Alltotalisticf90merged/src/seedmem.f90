@@ -42,6 +42,14 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
 
       if(CA_dom%latticetype.ne.CA_seed%latticetype)  STOP 'Seed lattice different from input lattice'
 
+      if(CA_seed%stype.eq.'indices') then
+          if (CA_dom%D .ne. 3) STOP 'indices seed valid only with 3D lattice'
+      endif
+
+      if(CA_seed%stype.eq.'indices') then
+          if (CA_seed%latticetype .ne. 'sc') STOP 'indices seed valid only with sc lattice'
+      endif
+
       do i =1, CA_seed%nseed
           read(12,*) CA_seed%idxr(i,:)
       enddo
@@ -71,16 +79,25 @@ subroutine seed_in_state_ind(CA_dom,CA_state,CA_seed)
    type(state ) :: CA_state
    type(seed  ) :: CA_seed
 ! local variables
-   integer      :: i,j,k,n,m
+   integer                          :: i,j,k,n,n1,m
+   integer,dimension(CA_seed%nseed) :: checker
+
+   checker(:) = 0 
 
    do n =1, CA_seed%nseed
       i = CA_seed%idx(n,1) + CA_seed%origin(1)
       j = CA_seed%idx(n,2) + CA_seed%origin(2)
       k = CA_seed%idx(n,3) + CA_seed%origin(3)
-      m = (i-1)*CA_dom%isize
-      m = (m+j-1)*CA_dom%isize+k
-      CA_state%ipopulation(m)=1
+      if (match_ind(CA_dom,CA_seed,i,j,k)) then
+          m = (i-1)*CA_dom%isize
+          m = (m+j-1)*CA_dom%isize+k
+          CA_state%ipopulation(m)=CA_state%ipopulation(m)+1
+          checker(n) = 1
+      endif
    enddo
+
+   if (minval(checker) .EQ. 0) STOP 'seed: point in seed not positioned in lattice'
+   if (maxval(CA_state%ipopulation) .GT. 1) STOP 'seed: point redundant definition'
 
 end subroutine
 
@@ -98,7 +115,7 @@ subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
    do i=1,CA_seed%nseed
       do j=1, CA_dom%s
 
-        if (match(CA_dom,j,CA_seed,i)) then
+        if (match_xyz(CA_dom,j,CA_seed,i)) then
             CA_state%ipopulation(j) = 1
             checker(i)            = checker(i) + 1
         endif
@@ -110,16 +127,44 @@ subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
    if (maxval(checker) .GT. 1) STOP 'seed: point redundant definition'
 end subroutine
 
-function  match(CA_dom,j,CA_seed,i)
+function  match_ind(CA_dom,CA_seed,i,j,k)
+   implicit none
+   type(domain) :: CA_dom
+   type(seed)   :: CA_seed
+   integer      :: i,j,k
+   logical      :: match_ind
+! local variables
+   integer      :: shifted
+   integer      :: i_s,j_s,k_s
+
+   match_ind = .TRUE.
+!  SELECT CASE (CA_seed%origin_type)
+!        CASE('manual')
+!            i_s =  i + CA_seed%origin(1)
+!            j_s =  j + CA_seed%origin(2)
+!            k_s =  k + CA_seed%origin(3)
+!        CASE('center')
+!            i_s = i + CA_dom%isize/2
+!            j_s = j + CA_dom%isize/2
+!            k_s = k + CA_dom%isize/2
+!  END SELECT
+
+   if ( (i.LT.1) .OR. (i.GT.CA_dom%isize)) match_ind = .FALSE.
+   if ( (j.LT.1) .OR. (j.GT.CA_dom%isize)) match_ind = .FALSE.
+   if ( (k.LT.1) .OR. (k.GT.CA_dom%isize)) match_ind = .FALSE.
+
+end function
+
+function  match_xyz(CA_dom,j,CA_seed,i)
    implicit none
    type(domain) :: CA_dom
    type(seed  ) :: CA_seed
    integer      :: i,j
-   logical      :: match
+   logical      :: match_xyz
 ! local variables
    integer      :: k,shifted
    
-   match = .TRUE.
+   match_xyz = .TRUE.
    do k =1, CA_dom%D
       SELECT CASE (CA_seed%origin_type)
          CASE('manual')
@@ -127,7 +172,7 @@ function  match(CA_dom,j,CA_seed,i)
          CASE('center')
              shifted = CA_seed%idx(i,k) + CA_dom%isize/2
       END SELECT
-      if (CA_dom%v1DtoND(j,k) .NE. shifted) match = .FALSE.
+      if (CA_dom%v1DtoND(j,k) .NE. shifted) match_xyz = .FALSE.
    enddo
 end function
     
