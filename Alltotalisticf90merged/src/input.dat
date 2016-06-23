@@ -1,6 +1,6 @@
 &files 
-    seedfile='../SEED/seedpaolo.in'
-    rulefile='../RULE/rule.in'
+    seedfile='../SEED/seedsmall.in'
+    rulefile='../RULE/rulesmall2.in'
   /
 &control
     calculation = 'relax',
@@ -11,9 +11,9 @@
 ! 'fcc', 'sc'
     neighbourhood='vonneumann'
 !'moore' 'vonneumann'
-    isize = 100
+    isize = 5
  /    
 &steps
-  nstep = 12
-  nprint = 6
+  nstep = 1
+  nprint = 1
  /

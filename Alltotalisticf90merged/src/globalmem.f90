@@ -14,6 +14,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
       use statemem
       use seedmem
       use rulemem
+      use stepmem
       implicit none
       character(30)        :: filein,seedfile, rulefile, neighbourhood 
       character(3)         :: latticetype,latticetyper
@@ -60,7 +61,10 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
         endif 
 
       read(11,nml=steps)
-      
+
+       CA_step%nstep = nstep
+       CA_step%nprint = nprint
+
       close(11)
 
       end subroutine

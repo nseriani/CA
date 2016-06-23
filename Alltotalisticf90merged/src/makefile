@@ -46,11 +46,13 @@ LIBTRAJ = 	latticemem.o \
 		statemem.o \
 		seedmem.o \
 		rulemem.o \
+		stepmem.o \
                 globalmem.o \
                 scvonneumann.o \
                 cellular.o \
                 scmoore.o\
                 init.o\
+		update.o\
                 lazser.o
 
 lazser.x : $(LIBCOMMON) $(LIBTRAJ)
