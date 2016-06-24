@@ -2,9 +2,6 @@
     seedfile='../SEED/seedsmall.in'
     rulefile='../RULE/rulealltotal.in'
   /
-&control
-    calculation = 'relax',
- /
 &lattice
     idimension=3
     latticetype = 'sc'
