@@ -1,6 +1,6 @@
 &files 
     seedfile='../SEED/seedsmall.in'
-    rulefile='../RULE/rulesmall2.in'
+    rulefile='../RULE/rulesmalltotal.in'
   /
 &control
     calculation = 'relax',
@@ -14,6 +14,6 @@
     isize = 5
  /    
 &steps
-  nstep = 1
-  nprint = 1
+  nstep = 6
+  nprint = 3
  /

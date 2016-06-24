@@ -1,0 +1,4 @@
+ sc        Lattice type 
+ outer2     Type of rule: generic, totalistic, outer (totalistic)
+ 0 1 0 0 0 0 0 0 0       For outer, only ctilde is specified (see Packard and Wolfram J Stat Phys 38, 901 (1985) for a definition 
+ 1 1 1 1 1 1 1 1 1
