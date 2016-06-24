@@ -13,13 +13,20 @@
       type(state )         :: CA_state
       type(rule  )         :: CA_rule
 !     Local variabiles
-      integer i
+      integer i, k
 
-      do i =1, CA_step%nstep 
 
-        call update(CA_dom,CA_state, CA_rule)
-        if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state)
+      if(CA_rule%ruletype.eq.'alltotalistic') then
+           STOP 'All totalistic option not ready yet'
+     
+      else
 
-      enddo
+        do i =1, CA_step%nstep 
+
+         call update(CA_dom,CA_state, CA_rule)
+         if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state)
+
+        enddo
+      endif
 
       end

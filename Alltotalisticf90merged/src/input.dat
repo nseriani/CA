@@ -1,6 +1,6 @@
 &files 
     seedfile='../SEED/seedsmall.in'
-    rulefile='../RULE/rulesmalltotal.in'
+    rulefile='../RULE/rulealltotal.in'
   /
 &control
     calculation = 'relax',

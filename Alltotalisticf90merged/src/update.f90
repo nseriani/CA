@@ -15,7 +15,6 @@
       integer i,j,k
 !!      type(state )         :: CA_state1
 
-       write(*,*) sum(CA_state%ipopulation(:))
        SELECT CASE (CA_rule%ruletype)
           CASE ('outer')
 

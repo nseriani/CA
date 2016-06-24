@@ -53,7 +53,8 @@ subroutine init_rule(CA_dom,CA_rule)
           CASE ('totalistic')
                read(12,*) CA_rule%icrule
 !               STOP 'Non-outer totalistic rule not yet implemented!'
-
+          CASE ('alltotalistic')
+                write(*,*) ' Doing all totalistic rules  '
           CASE ('generic')
                STOP 'Generic rule not yet implemented!'
 
