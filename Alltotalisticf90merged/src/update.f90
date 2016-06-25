@@ -16,7 +16,7 @@
 !!      type(state )         :: CA_state1
 
        SELECT CASE (CA_rule%ruletype)
-          CASE ('outer')
+          CASE ('outer', 'outer2')
 
             do i=1,CA_dom%S
 !!!  For every cell, I calculate the number of occupied neighbours
@@ -32,23 +32,6 @@
             do i=1,CA_dom%S
               CA_state%ipopulation(i) = CA_state%ipop(i)
             enddo            
-
-          CASE('outer2')
-
-            do i=1,CA_dom%S
-!!!  For every cell, I calculate the number of occupied neighbours
-             j=0
-             do k=1,CA_dom%nneigh
-               j = j + CA_state%ipopulation(CA_dom%neighlist(i,k))
-             enddo
-!!  Apply update rule to site i, store new population in ipop
-              CA_state%ipop(i)=ibits(CA_rule%ictilde, j+1-CA_state%ipopulation(i),1)
-!!              write(*,*) j, CA_state%ipopulation(i), CA_state%ipop(i), CA_rule%ictilde
-            enddo
-!! Now update real population ipopulation
-            do i=1,CA_dom%S
-              CA_state%ipopulation(i) = CA_state%ipop(i)
-            enddo
 
       CASE ('totalistic')
 

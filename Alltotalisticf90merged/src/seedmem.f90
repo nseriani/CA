@@ -92,6 +92,7 @@ subroutine seed_in_state_ind(CA_dom,CA_state,CA_seed)
           m = (i-1)*CA_dom%isize
           m = (m+j-1)*CA_dom%isize+k
           CA_state%ipopulation(m)=CA_state%ipopulation(m)+1
+        CA_state%ipopulation0(m)=CA_state%ipopulation0(m)+1
           checker(n) = 1
       endif
    enddo
@@ -117,6 +118,7 @@ subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
 
         if (match_xyz(CA_dom,j,CA_seed,i)) then
             CA_state%ipopulation(j) = 1
+            CA_state%ipopulation0(j) = 1
             checker(i)            = checker(i) + 1
         endif
 
@@ -177,3 +179,4 @@ function  match_xyz(CA_dom,j,CA_seed,i)
 end function
     
 end module
+
