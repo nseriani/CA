@@ -28,6 +28,8 @@
 
     call compute_nearneighbour(CA_dom)
 
+    call dump_lattice(CA_dom)
+
 !   Initailize state
 
     call init_state(CA_dom,CA_state)  
@@ -36,7 +38,7 @@
 
     call init_seed(CA_dom,CA_state,CA_seed)
 
-    call dump_state(CA_dom,CA_state)
+!   call dump_state(CA_dom,CA_state)
 
 !   Read the rule
 

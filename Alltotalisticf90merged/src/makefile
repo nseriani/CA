@@ -43,9 +43,9 @@ LIBCOMMON =
 
 LIBTRAJ = 	latticemem.o \
 		nearneighbourmem.o \
+		rulemem.o \
 		statemem.o \
 		seedmem.o \
-		rulemem.o \
 		stepmem.o \
                 globalmem.o \
                 scvonneumann.o \

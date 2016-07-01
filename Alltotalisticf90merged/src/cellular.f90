@@ -27,7 +27,7 @@
            do i =1, CA_step%nstep
              
              call update(CA_dom,CA_state, CA_rule)
-             if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state)
+             if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
 
            enddo 
             
@@ -37,7 +37,7 @@
         do i =1, CA_step%nstep 
 
          call update(CA_dom,CA_state, CA_rule)
-         if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state)
+         if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
 
         enddo
       endif

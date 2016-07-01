@@ -23,21 +23,31 @@ subroutine init_state(CA_dom,CA_state)
 
 end subroutine
 
-subroutine dump_state(CA_dom,CA_state)
+subroutine dump_state(CA_dom,CA_state,CA_rule)
 use latticemem
+use rulemem
 implicit none
-!local variables
 type(domain)   :: CA_dom
 type(state )   :: CA_state
+type(rule  )   :: CA_rule
+!local variables
 integer        :: i
 logical        :: isOccupied
+logical        :: file_exist
 character(len=1024)  :: filename
 character(len=1024)  :: cube_side
+character(len=1024)  :: rule_name
 
 write (cube_side, "(I3.3)") CA_dom%isize
-filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'state.xyz'
+write (rule_name, "(I4.4)") CA_rule%icrule
+filename =  '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)//'_r'//TRIM(rule_name)//'_state.xyz'
 
-OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRITE")
+inquire(FILE=TRIM(filename),exist=file_exist)
+if(file_exist) then
+    OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="OLD",POSITION="APPEND",ACTION="WRITE")
+else
+    OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRITE")
+endif
 
     write(unit=333,FMT=*) sum(CA_state%ipopulation(:))
     write(unit=333,FMT=*) 
