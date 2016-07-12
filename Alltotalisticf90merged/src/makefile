@@ -11,6 +11,7 @@ SHELL = /bin/bash
 GFC = gfortran
 GOPTFLAGS = -ffast-math -funroll-loops -O3
 GDEBUGFLAGS = -Wall -g  -C -DEBUG -fbounds-check
+#####-Wall -g  -C -DEBUG -fbounds-check
 IOPTFLAGS = -O3 -ipo -static-libcxa
 IMOPTFLAGS = -g0 
 IDEBUGFLAGS = -g -C -debug extended -debug inline_debug_info -traceback 
@@ -36,7 +37,7 @@ CPPDEFS=-D__PARALLEL -D_VCS_VER='$(VCS_VER)'
 CPPFLAGS= $(WORKING_DIR_CHANGES) -I.
 
 lazser : 
-	make lazser.x FC=$(GFC) FLAGS="$(GDEBUGFLAGS)" LDFLAGS="$(GLDFLAGS)" \
+	make lazser.x FC=$(GFC) FLAGS="$(GOPTFLAGS)" LDFLAGS="$(GLDFLAGS)" \
 	ARCH=$(G$(SETARCH)) ARCHFLAGS="$(GARCHFLAGS)"
 
 LIBCOMMON =     

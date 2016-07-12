@@ -1,6 +1,6 @@
 &files 
     seedfile='../SEED/seedsmall.in'
-    rulefile='../RULE/rulealltotal.in'
+    rulefile='../RULE/ruleallgrowth.in'
   /
 &lattice
     idimension=3
@@ -8,9 +8,9 @@
 ! 'fcc', 'sc'
     neighbourhood='vonneumann'
 !'moore' 'vonneumann'
-    isize = 5
+    isize = 100
  /    
 &steps
-  nstep = 6
-  nprint = 3
+  nstep = 1
+  nprint = 1
  /

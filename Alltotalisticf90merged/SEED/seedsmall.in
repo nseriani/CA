@@ -1,4 +1,4 @@
   1               1) Number of atoms in the seed
   sc indices    1) Lattice type    2) Seed format((3D-)indices or xyz coordinates)
-  manual 1 1 1
+  manual 50 50 50
   0 0 0

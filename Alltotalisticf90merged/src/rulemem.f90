@@ -55,6 +55,9 @@ subroutine init_rule(CA_dom,CA_rule)
 !               STOP 'Non-outer totalistic rule not yet implemented!'
           CASE ('alltotalistic')
                 write(*,*) ' Doing all totalistic rules  '
+          CASE ('allgrowth')
+! All outer totalistic rules that correspond to particle growth without dissolution 
+               write(*,*) ' Doing all outer totalistic rules leading to growth  '
           CASE ('generic')
                STOP 'Generic rule not yet implemented!'
 
