@@ -20,7 +20,7 @@
 
          CA_rule%ruletype = 'totalistic'
          do i2 =0, 2**(CA_dom%nneigh+1)
-           write(*,*) 'rule ', i2
+           write(*,*) 'rule: C = ', i2
            CA_rule%icrule = i2
            CA_state%ipopulation = CA_state%ipopulation0
            
@@ -39,7 +39,7 @@
          CA_rule%ruletype = 'outer'
 
          do i2 =0, 2**(CA_dom%nneigh+1)-1
-!!!           write(*,*) 'rule ', i2
+!!!           write(*,*) 'rule: Ctilde = ', i2
 
            CA_rule%ictilde = 0   
 
@@ -56,7 +56,7 @@
             CA_rule%ictilde=CA_rule%ictilde + (2**(2*j))
 
            enddo
-            write(*,*) 'rule ', CA_rule%ictilde
+            write(*,*) 'rule: Ctilde = ', CA_rule%ictilde
 
            CA_state%ipopulation = CA_state%ipopulation0
 
