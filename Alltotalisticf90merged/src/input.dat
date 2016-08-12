@@ -1,6 +1,6 @@
 &files 
-    seedfile='../SEED/seedsmall.in'
-    rulefile='../RULE/ruleallgrowth.in'
+    seedfile='../SEED/seed.in'
+    rulefile='../RULE/ruleouter2.in'
   /
 &lattice
     idimension = 3

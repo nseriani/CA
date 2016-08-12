@@ -49,7 +49,7 @@ subroutine init_rule(CA_dom,CA_rule)
                    CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(2,i)*(2**(2*i))
                enddo
                write(*,*) ' Ctilde  ', CA_rule%ictilde
-
+               
           CASE ('totalistic')
                read(12,*) CA_rule%icrule
 !               STOP 'Non-outer totalistic rule not yet implemented!'
