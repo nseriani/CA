@@ -25,7 +25,7 @@
                j = j + CA_state%ipopulation(CA_dom%neighlist(i,k))
              enddo
 !!  Apply update rule to site i, store new population in ipop
-              CA_state%ipop(i)=ibits(CA_rule%ictilde, 2*j+1-CA_state%ipopulation(i),1)
+              CA_state%ipop(i)=ibits(CA_rule%ictilde, 2*j+CA_state%ipopulation(i),1)
 !!              write(*,*) j, CA_state%ipopulation(i), CA_state%ipop(i), CA_rule%ictilde     
             enddo
 !! Now update real population ipopulation

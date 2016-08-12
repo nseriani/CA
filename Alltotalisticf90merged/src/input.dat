@@ -1,5 +1,5 @@
 &files 
-    seedfile='../SEED/seed.in'
+    seedfile='../SEED/seedlarger.in'
     rulefile='../RULE/ruleouter2.in'
   /
 &lattice
@@ -11,6 +11,6 @@
     isize = 100
  /    
 &steps
-  nstep = 1
+  nstep = 3
   nprint = 1
  /

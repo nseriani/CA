@@ -45,8 +45,8 @@ subroutine init_rule(CA_dom,CA_rule)
 !   This is the definition of C tilde from Packard and Wolfram, J Stat Phys 38,
 !   901 (1985))
                do i=0,CA_dom%nneigh
-                   CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(1,i)*(2**(2*i+1))
-                   CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(2,i)*(2**(2*i))
+                   CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(1,i)*(2**(2*i))
+                   CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(2,i)*(2**(2*i+1))
                enddo
                write(*,*) ' Ctilde  ', CA_rule%ictilde
                
