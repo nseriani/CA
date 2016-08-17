@@ -1,10 +1,23 @@
 import numpy as np
+import sys
 #filein='sc_100_r0118_state.xyz'
 
 def getFrames(filein):
 
-   f = open(filein, 'r')
+   file_ext=filein.split(".")[-1]
 
+   if   file_ext=='x': 
+          site_type=np.dtype([('cell_type','S100'),('x', np.int)])
+   elif file_ext=='xy':
+          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int)])
+   elif file_ext=='xyz':
+          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int),('z', np.int)])
+   elif file_ext=='xyzt':
+          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int),('z', np.int),('t', np.int)])
+   else:
+          sys.exit("File format not understood, put .x, .xy, .xyz, .xyzt !")
+
+   f = open(filein, 'r')
    all_lines=[]
 
    for line in f:
@@ -26,11 +39,10 @@ def getFrames(filein):
         if start >= len(all_lines):break
         end=int(all_lines[start])+start+1
         start+=1
-    
-   site_type3D=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int),('z', np.int)])
 
    CA_output=[]
+
    for frame in all_frames:
-       CA_output.append(np.loadtxt(frame,dtype=site_type3D))
+       CA_output.append(np.loadtxt(frame,dtype=site_type))
      
    return CA_output
