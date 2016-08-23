@@ -1,16 +1,16 @@
 &files 
-    seedfile='../SEED/seedlarger.in'
-    rulefile='../RULE/ruleouter2.in'
+    seedfile='../SEED/seed-1small.in'
+    rulefile='../RULE/ruletotalistic-14.in'
   /
 &lattice
     idimension = 3
     latticetype = 'sc'
 ! 'fcc', 'sc'
-    neighbourhood='vonneumann'
+    neighbourhood='moore'
 !'moore' 'vonneumann'
-    isize = 100
+    isize = 11
  /    
 &steps
-  nstep = 3
-  nprint = 1
+  nstep = 5
+  nprint = 5
  /

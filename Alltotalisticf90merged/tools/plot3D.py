@@ -3,7 +3,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 from getFrames import *
 
-CA_output=getFrames("../OUTPUT/sc_100_r0011_state.xyz")
+CA_output=getFrames("../OUTPUT/sc_100_r0000_state.xyz")
 for t,frame in enumerate(CA_output):
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
