@@ -5,7 +5,6 @@ INTEGER                               :: S                  ! size of the  State
 INTEGER, allocatable, dimension(:)    :: ipopulation,ipop, ipopulation0   ! state vectors
 end type state
 type(state),save                      :: CA_state1
-
 contains
 
 subroutine init_state(CA_dom,CA_state)
@@ -37,10 +36,25 @@ logical        :: file_exist
 character(len=1024)  :: filename
 character(len=1024)  :: cube_side
 character(len=1024)  :: rule_name
+character(len=1024)  :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+
+SELECT CASE (CA_dom%D)
+   CASE(1)
+       st_suffix='x'
+   CASE(2)
+       st_suffix='xy'
+   CASE(3)
+       st_suffix='xyz'
+   CASE(4)
+       st_suffix='xyzt'
+   CASE DEFAULT
+       st_suffix='nD'
+END SELECT
 
 write (cube_side, "(I3.3)") CA_dom%isize
 write (rule_name, "(I4.4)") CA_rule%icrule
-filename =  '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)//'_r'//TRIM(rule_name)//'_state.xyz'
+
+filename =  '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)//'_r'//TRIM(rule_name)//'_state.'//TRIM(st_suffix)
 
 inquire(FILE=TRIM(filename),exist=file_exist)
 if(file_exist) then
