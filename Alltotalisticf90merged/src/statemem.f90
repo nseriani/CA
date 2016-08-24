@@ -33,10 +33,10 @@ type(rule  )   :: CA_rule
 integer        :: i
 logical        :: isOccupied
 logical        :: file_exist
-character(len=1024)  :: filename
-character(len=1024)  :: cube_side
+character(len=100)  :: filename
+character(len=100)  :: cube_side
 character(len=1024)  :: rule_name
-character(len=1024)  :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
 
 SELECT CASE (CA_dom%D)
    CASE(1)

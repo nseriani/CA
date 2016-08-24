@@ -1,7 +1,7 @@
 module rulemem
 use latticemem
 type rule
-CHARACTER (LEN=30)                    :: rulefile
+CHARACTER (LEN=100)                   :: rulefile
 CHARACTER (LEN=10)                    :: latticetype
 CHARACTER (LEN=30)                    :: ruletype
 INTEGER                               :: ictilde         ! number of cells for seed

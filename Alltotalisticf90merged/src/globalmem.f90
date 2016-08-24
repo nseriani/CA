@@ -16,7 +16,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
       use rulemem
       use stepmem
       implicit none
-      character(30)        :: filein,seedfile, rulefile, neighbourhood 
+      character(100)       :: filein,seedfile, rulefile, neighbourhood 
       character(3)         :: latticetype,latticetyper
       integer              :: idimension,isize
       integer              :: nstep, nprint
