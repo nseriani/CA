@@ -89,8 +89,8 @@ subroutine seed_in_state_ind(CA_dom,CA_state,CA_seed)
       j = CA_seed%idx(n,2) + CA_seed%origin(2)
       k = CA_seed%idx(n,3) + CA_seed%origin(3)
       if (match_ind(CA_dom,CA_seed,i,j,k)) then
-          m = (i-1)*CA_dom%isize
-          m = (m+j-1)*CA_dom%isize+k
+          m = (k-1)*CA_dom%isize
+          m = (m+j-1)*CA_dom%isize+i
           CA_state%ipopulation(m)=CA_state%ipopulation(m)+1
         CA_state%ipopulation0(m)=CA_state%ipopulation0(m)+1
           checker(n) = 1
