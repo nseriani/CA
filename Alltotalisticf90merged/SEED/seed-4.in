@@ -1,5 +1,5 @@
   16               1) Number of atoms in the seed
-  sc    xyz    1) Lattice type    2) Seed format((3D-)indices or xyz coordinates)
+  sc    coord    1) Lattice type    2) Seed format((3D-)indices or coord coordinates)
  manual 50 50 50
    49.0 49.0 50.0
    49.0 50.0 50.0

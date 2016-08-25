@@ -5,7 +5,7 @@ type seed
 CHARACTER (LEN=30)                    :: seedfile
 CHARACTER (LEN=10)                    :: latticetype
 CHARACTER (LEN=30)                    :: neighbourhood
-CHARACTER (LEN=30)                    :: stype         ! indices or xyz.... 
+CHARACTER (LEN=30)                    :: stype         ! indices or coord.... 
 CHARACTER (LEN=30)                    :: origin_type   ! manual or centered
 INTEGER                               :: nseed         ! number of cells for seed
 INTEGER, allocatable, dimension(:)    :: origin        ! indexes for seed
@@ -43,11 +43,11 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
       if(CA_dom%latticetype.ne.CA_seed%latticetype)  STOP 'Seed lattice different from input lattice.'
 
       if(CA_seed%stype.eq.'indices') then
-          if (CA_dom%D .ne. 3) STOP 'indices seed format valid only with 3D lattice, try with xyz.'
+          if (CA_dom%D .ne. 3) STOP 'indices seed format valid only with 3D lattice, try with coord.'
       endif
 
       if(CA_seed%stype.eq.'indices') then
-          if (CA_seed%latticetype .ne. 'sc') STOP 'indices seed format valid only with sc lattice, try with xyz.'
+          if (CA_seed%latticetype .ne. 'sc') STOP 'indices seed format valid only with sc lattice, try with coord.'
       endif
 
       do i =1, CA_seed%nseed
@@ -62,9 +62,9 @@ subroutine init_seed(CA_dom,CA_state,CA_seed)
             CA_seed%idx = int(CA_seed%idxr)
             call seed_in_state_ind(CA_dom,CA_state,CA_seed)
 
-          CASE('xyz') 
+          CASE('coord') 
             CA_seed%idx = int(CA_seed%idxr)
-            call seed_in_state_xyz(CA_dom,CA_state,CA_seed)
+            call seed_in_state_coord(CA_dom,CA_state,CA_seed)
 
           CASE DEFAULT
                STOP 'Wrong seedtype'
@@ -102,7 +102,7 @@ subroutine seed_in_state_ind(CA_dom,CA_state,CA_seed)
 
 end subroutine
 
-subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
+subroutine seed_in_state_coord(CA_dom,CA_state,CA_seed)
    implicit none
    type(domain) :: CA_dom
    type(state ) :: CA_state
@@ -116,7 +116,7 @@ subroutine seed_in_state_xyz(CA_dom,CA_state,CA_seed)
    do i=1,CA_seed%nseed
       do j=1, CA_dom%s
 
-        if (match_xyz(CA_dom,j,CA_seed,i)) then
+        if (match_coord(CA_dom,j,CA_seed,i)) then
             CA_state%ipopulation(j) = 1
             CA_state%ipopulation0(j) = 1
             checker(i)            = checker(i) + 1
@@ -157,16 +157,16 @@ function  match_ind(CA_dom,CA_seed,i,j,k)
 
 end function
 
-function  match_xyz(CA_dom,j,CA_seed,i)
+function  match_coord(CA_dom,j,CA_seed,i)
    implicit none
    type(domain) :: CA_dom
    type(seed  ) :: CA_seed
    integer      :: i,j
-   logical      :: match_xyz
+   logical      :: match_coord
 ! local variables
    integer      :: k,shifted
    
-   match_xyz = .TRUE.
+   match_coord = .TRUE.
    do k =1, CA_dom%D
       SELECT CASE (CA_seed%origin_type)
          CASE('manual')
@@ -174,7 +174,7 @@ function  match_xyz(CA_dom,j,CA_seed,i)
          CASE('center')
              shifted = CA_seed%idx(i,k) + CA_dom%isize/2
       END SELECT
-      if (CA_dom%v1DtoND(j,k) .NE. shifted) match_xyz = .FALSE.
+      if (CA_dom%v1DtoND(j,k) .NE. shifted) match_coord = .FALSE.
    enddo
 end function
     

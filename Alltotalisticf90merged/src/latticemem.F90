@@ -159,9 +159,23 @@ type(domain)   :: CA_dom
 integer        :: i,j
 character(len=1024)  :: filename
 character(len=1024)  :: cube_side
+character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+
+SELECT CASE (CA_dom%D)
+   CASE(1)
+       st_suffix='x'
+   CASE(2)
+       st_suffix='xy'
+   CASE(3)
+       st_suffix='xyz'
+   CASE(4)
+       st_suffix='xyzt'
+   CASE DEFAULT
+       st_suffix='nD'
+END SELECT
 
 write (cube_side, "(I3.3)") CA_dom%isize
-filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'.xyz'
+filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'.'//TRIM(st_suffix)
 
 OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRITE")
 
