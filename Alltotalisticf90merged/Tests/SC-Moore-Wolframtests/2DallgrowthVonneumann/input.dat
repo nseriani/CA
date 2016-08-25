@@ -1,0 +1,16 @@
+&files 
+    seedfile='../SEED/seed-1-2dbis.in'
+    rulefile='../RULE/ruleallgrowth.in'
+  /
+&lattice
+    idimension = 2
+    latticetype = 'sc'
+! 'fcc', 'sc'
+    neighbourhood='vonneumann'
+!'moore' 'vonneumann'
+    isize = 100
+ /    
+&steps
+  nstep = 5
+  nprint = 5
+ /

@@ -1,0 +1,16 @@
+&files 
+    seedfile='../SEED/seed-1-2d.in'
+    rulefile='../RULE/ruleouter7.in'
+  /
+&lattice
+    idimension = 2
+    latticetype = 'sc'
+! 'fcc', 'sc'
+    neighbourhood='moore'
+!'moore' 'vonneumann'
+    isize = 200
+ /    
+&steps
+  nstep = 93
+  nprint = 93
+ /

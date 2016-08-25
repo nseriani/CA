@@ -1,0 +1,23 @@
+seedmem.f90:
+
+   do n =1, CA_seed%nseed
+      i = CA_seed%idx(n,1) + CA_seed%origin(1)
+      j = CA_seed%idx(n,2) + CA_seed%origin(2)
+      k = CA_seed%idx(n,3) + CA_seed%origin(3)
+
+      if (match_ind(CA_dom,CA_seed,i,j,k)) then
+          m = (i-1)*CA_dom%isize
+          m = (m+j-1)*CA_dom%isize+k
+          CA_state%ipopulation(m)=CA_state%ipopulation(m)+1
+        CA_state%ipopulation0(m)=CA_state%ipopulation0(m)+1
+          checker(n) = 1
+      endif
+
+
+m = isize^2 *(i-1) + isize * (j-1) + k
+
+
+
+
+
+

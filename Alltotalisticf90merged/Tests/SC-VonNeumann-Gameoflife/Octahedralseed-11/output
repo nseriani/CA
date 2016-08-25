@@ -1,0 +1,11 @@
+ Type of lattice:       sc        
+ Type of neighbourhood: vonneumann                    
+ Seed file: ../SEED/seedoctahedron.in     
+ Number of cells in the seed:           11
+ From seed file: sc          indices                       
+ Seed origin type: manual                         Seed origin position            0           0           0
+ rule file: ../RULE/ruleouter2.in         
+ From rule file: sc          outer2                        
+  Ctilde           176
+ End of calculation. Good bye.
+
