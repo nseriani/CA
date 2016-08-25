@@ -57,6 +57,7 @@
 
            enddo
             write(*,*) 'rule: Ctilde = ', CA_rule%ictilde
+            CA_rule%icrule = CA_rule%ictilde
 
            CA_state%ipopulation = CA_state%ipopulation0
 
