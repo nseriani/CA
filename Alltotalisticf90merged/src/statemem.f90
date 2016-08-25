@@ -52,7 +52,7 @@ SELECT CASE (CA_dom%D)
 END SELECT
 
 write (cube_side, "(I3.3)") CA_dom%isize
-write (rule_name, "(I4.4)") CA_rule%icrule
+write (rule_name, "(I15.15)") CA_rule%icrule
 
 filename =  '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)//'_r'//TRIM(rule_name)//'_state.'//TRIM(st_suffix)
 
