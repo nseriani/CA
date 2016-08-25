@@ -34,7 +34,7 @@ subroutine init_rule(CA_dom,CA_rule)
       SELECT CASE (CA_rule%ruletype)
           CASE ('outer')
                read(12,*) CA_rule%ictilde
-
+               CA_rule%icrule = CA_rule%ictilde
           CASE('outer2') 
                allocate(CA_rule%irule(2,0:CA_dom%nneigh))
 !  irule(1,:): when the central site is empty
@@ -49,7 +49,8 @@ subroutine init_rule(CA_dom,CA_rule)
                    CA_rule%ictilde = CA_rule%ictilde + CA_rule%irule(2,i)*(2**(2*i+1))
                enddo
                write(*,*) ' Ctilde  ', CA_rule%ictilde
-               
+               CA_rule%icrule = CA_rule%ictilde
+
           CASE ('totalistic')
                read(12,*) CA_rule%icrule
 !               STOP 'Non-outer totalistic rule not yet implemented!'
