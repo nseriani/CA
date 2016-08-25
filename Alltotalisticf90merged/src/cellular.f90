@@ -19,7 +19,7 @@
       if(CA_rule%ruletype.eq.'alltotalistic') then
 
          CA_rule%ruletype = 'totalistic'
-         do i2 =0, 2**(CA_dom%nneigh+1)
+         do i2 =0, 2**(CA_dom%nneigh+2)-1
            write(*,*) 'rule: C = ', i2
            CA_rule%icrule = i2
            CA_state%ipopulation = CA_state%ipopulation0
@@ -44,7 +44,7 @@
            CA_rule%ictilde = 0   
 
 !! In the growth rules, if the central site is full, it remains full:
-!! This is why i nthe following the even powers of 2 are always 1 in ictilde
+!! This is why in the following the odd powers of 2 are always 1 in ictilde
 !! (see the definition of C tilde from Packard and Wolfram, J Stat Phys 38,
 !   901 (1985))
 !! This definition must be kept compatible with ictilde definition in rulemem
@@ -52,8 +52,8 @@
 
            do j=0, CA_dom%nneigh 
             
-            CA_rule%ictilde=CA_rule%ictilde + ibits(i2, j ,1)*(2**(2*j+1))
-            CA_rule%ictilde=CA_rule%ictilde + (2**(2*j))
+            CA_rule%ictilde=CA_rule%ictilde + ibits(i2, j ,1)*(2**(2*j))
+            CA_rule%ictilde=CA_rule%ictilde + (2**(2*j+1))
 
            enddo
             write(*,*) 'rule: Ctilde = ', CA_rule%ictilde
