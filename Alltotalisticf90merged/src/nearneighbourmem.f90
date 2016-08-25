@@ -169,9 +169,14 @@ subroutine compute_Honeycomb(CA_dom)
 type(domain)                       :: CA_dom
 !Local variables
    INTEGER                   :: i,j,a,res
+   INTEGER                   :: dimHC1,dimHC2
    INTEGER,DIMENSION(6,2)    :: moveHC
 
    if (CA_dom%D .LT. 2) STOP 'Honeycomb requires dimension > 1'
+   if (CA_dom%D .GT. 1) then
+       dimHC1=1
+       dimHC1=2
+   endif
 
    CA_dom%nneigh=6 + 2*(CA_dom%D-2)   ! Honeycomb
 
@@ -186,8 +191,8 @@ type(domain)                       :: CA_dom
       
    CA_dom%n=CA_dom%m
    DO i=1,6
-     CA_dom%n=EOSHIFT(CA_dom%n,SHIFT= moveHC(i,1),BOUNDARY=0,DIM=1)
-     CA_dom%n=EOSHIFT(CA_dom%n,SHIFT= moveHC(i,2),BOUNDARY=0,DIM=2)
+     CA_dom%n=EOSHIFT(CA_dom%n,SHIFT= moveHC(i,1),BOUNDARY=0,DIM=dimHC1)
+     CA_dom%n=EOSHIFT(CA_dom%n,SHIFT= moveHC(i,2),BOUNDARY=0,DIM=dimHC2)
      CA_dom%neighlist(:,i) =PACK(CA_dom%n,CA_dom%n==CA_dom%n)
      CA_dom%n=CA_dom%m
    ENDDO
