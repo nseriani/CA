@@ -63,6 +63,8 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
        CA_dom%n = mod(CA_dom%n,2)
 
+       if (CA_dom%shiftby1)  CA_dom%n = -CA_dom%n + 1 ! Zero cells became 1 and viceversa
+
        CA_dom%S=SUM(CA_dom%n)
 
        allocate(v(CA_dom%S))
@@ -71,7 +73,6 @@ SELECT CASE (TRIM(CA_dom%latticetype))
 
        CA_dom%m = UNPACK(v,CA_dom%n == 1,CA_dom%n) ! D-dimensional matrix of indexes
 
-       if (CA_dom%shiftby1)  CA_dom%m = -CA_dom%m + 1 ! Zero cells became 1 and viceversa
 
    CASE DEFAULT
 
