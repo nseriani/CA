@@ -175,7 +175,7 @@ type(domain)                       :: CA_dom
    if (CA_dom%D .LT. 2) STOP 'Honeycomb requires dimension > 1'
    if (CA_dom%D .GT. 1) then
        dimHC1=1
-       dimHC1=2
+       dimHC2=2
    endif
 
    CA_dom%nneigh=6 + 2*(CA_dom%D-2)   ! Honeycomb
