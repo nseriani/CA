@@ -1,0 +1,5 @@
+  2               1) Number of atoms in the seed
+  fcc    coord      1) Lattice type    2) Seed format((3D-)indices or coord coordinates)
+  manual 50 50 50
+  51  50  50
+  50  51  50
