@@ -1,10 +1,10 @@
 &files 
-    seedfile='../SEED/seed-1-2dbis.in'
-    rulefile='../RULE/ruleouter2fcc.in'
+    seedfile='../SEED/seed-hc7.in'
+    rulefile='../RULE/ruleouter2-hc.in'
   /
 &lattice
     idimension = 3
-    latticetype = 'fcc'
+    latticetype = 'hc'
 !'hc'
 ! 'fcc', 'sc'
     neighbourhood='vonneumann'
@@ -12,6 +12,6 @@
     isize = 100
  /    
 &steps
-  nstep = 2
+  nstep = 1
   nprint = 1
  /
