@@ -172,7 +172,7 @@ type(domain)                       :: CA_dom
    INTEGER                   :: dimHC1,dimHC2
    INTEGER,DIMENSION(6,2)    :: moveHC
 
-   if (CA_dom%D .LT. 2) STOP 'Honeycomb requires dimension > 1'
+   if (CA_dom%D .NE. 2) STOP 'Honeycomb requires dimension = 2'
    if (CA_dom%D .GT. 1) then
        dimHC1=1
        dimHC2=2
