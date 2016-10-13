@@ -7,13 +7,13 @@ def getFrames(filein):
    file_ext=filein.split(".")[-1]
 
    if   file_ext=='x': 
-          site_type=np.dtype([('cell_type','S100'),('x', np.int)])
+          site_type=np.dtype([('cell_type','S100'),('x', np.float)])
    elif file_ext=='xy':
-          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int)])
+          site_type=np.dtype([('cell_type','S100'),('x', np.float),('y', np.float)])
    elif file_ext=='xyz':
-          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int),('z', np.int)])
+          site_type=np.dtype([('cell_type','S100'),('x', np.float),('y', np.float),('z', np.float)])
    elif file_ext=='xyzt':
-          site_type=np.dtype([('cell_type','S100'),('x', np.int),('y', np.int),('z', np.int),('t', np.int)])
+          site_type=np.dtype([('cell_type','S100'),('x', np.float),('y', np.float),('z', np.float),('t', np.float)])
    else:
           sys.exit("File format not understood, put .x, .xy, .xyz, .xyzt !")
 
