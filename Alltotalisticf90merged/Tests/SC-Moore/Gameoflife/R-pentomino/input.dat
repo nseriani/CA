@@ -1,0 +1,17 @@
+&files 
+    seedfile='../SEED/R-pentomino.in'
+    rulefile='../RULE/rule-gameoflife-CONWAY.in'
+  /
+&lattice
+    idimension = 2
+    latticetype = 'sc'
+!'hc'
+! 'fcc', 'sc'
+    neighbourhood='moore'
+!'moore' 'vonneumann'
+    isize = 200
+ /    
+&steps
+  nstep = 1200
+  nprint = 1
+ /
