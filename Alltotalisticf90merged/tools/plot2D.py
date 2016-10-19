@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from getFrames import *
 
-CA_output=getFrames("../OUTPUT/hc_100_r000000000000075_state.xy")
+CA_output=getFrames("../OUTPUT/sc_999_r000000000000224_state.xy")
 for t,frame in enumerate(CA_output):
     fig = plt.figure()
     ax = fig.add_subplot(111)
