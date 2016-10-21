@@ -1,0 +1,17 @@
+&files 
+    seedfile='../SEED/7_segment.in'
+    rulefile='../RULE/rule2DWolframCIRCLE_746.in'
+  /
+&lattice
+    idimension = 2
+    latticetype = 'sc'
+!'hc'
+! 'fcc', 'sc'
+    neighbourhood='moore'
+!'moore' 'vonneumann'
+    isize = 400
+ /    
+&steps
+  nstep = 500
+  nprint = 1
+ /

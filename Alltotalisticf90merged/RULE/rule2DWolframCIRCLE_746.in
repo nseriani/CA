@@ -1,0 +1,5 @@
+ sc        Lattice type
+ outer2     Type of rule: generic, totalistic, outer (totalistic), outer2 (totalistic)
+ 0 0 0 1 0 0 0 0 0  site with 0 became 1
+ 1 1 1 1 1 0 0 0 0  site with 1 stay 1
+
