@@ -1,0 +1,320 @@
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- *** FILE AUTOMATICALLY CREATED: DO NOT EDIT, CHANGES WILL BE LOST *** -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+</head><body style="background-color: white; font-family: arial,helvetica,sans-serif; 
+font-size: 14px; padding-left: 10px; width: 700px;">
+<a name="__top__"></a><table style="background: rgb(0, 57, 90) none repeat scroll 0% 0%; vertical-align: top; 
+-moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<tbody><tr><th style="margin: 3px 3px 3px 10px; background: rgb(0, 57, 90) none repeat scroll 0% 0%; 
+-moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: 
+-moz-initial; color: rgb(255, 255, 238);">
+<h1 style="margin: 5px 10px 10px 15px; text-align: left;"> Input File Description </h1>
+<h2 style="margin: 5px 10px 10px 15px; text-align: left;"> Program: Lazser </h2>
+</th></tr>
+<tr><td style="padding: 10px 3px 3px; background: rgb(255, 255, 255) none repeat scroll 0% 0%; 
+-moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: 
+-moz-initial; color: rgb(34, 34, 34);">
+   <blockquote>
+<h3>TABLE OF CONTENTS</h3>
+<blockquote>
+<p><a>INTRODUCTION</a></p>
+The input is organized in three files: the <a href="#id3667238"> main input file</a>, the <a href="#id3667239"> seed file</a> and the <a href="#id3667240"> rule file</a>. 
+
+<p><a name="id3667238"></a><a name="Main input file:"></a></p><blockquote>
+*****************************************************
+<p><a> Main input file: it must be called "input.dat" </a></p>
+<p><a> &files </a></p>
+  </blockquote><blockquote>  
+   <a href="#id3667252"> seedfile </a>  
+</blockquote><blockquote>
+   <a href="#id3667553"> rulefile </a> 
+</blockquote><blockquote>
+ /
+</blockquote><blockquote> 
+ &lattice 
+</blockquote><blockquote>
+ <a href="#id3667554"> idimension </a> 
+</blockquote><blockquote>
+ <a href="#id3667555"> latticetype </a>  
+ </blockquote><blockquote>
+ <a href="#id3667556"> neighbourhood </a>
+ </blockquote><blockquote>
+ <a href="#id3667557"> isize </a>
+ </blockquote><blockquote>
+ /
+</blockquote><blockquote> 
+ &steps
+</blockquote><blockquote>
+ <a href="#id3667558">  nstep </a>
+ </blockquote><blockquote>
+ <a href="#id3667559"> nprint  </a>
+ </blockquote><blockquote>
+  
+</blockquote><p></p>
+
+<p><a name="id3667239"></a><a name="Seed file file:"></a></p><blockquote> 
+*****************************************************
+<p><a>Input file 'seedfile':</a></p>
+   <a href="#id3668138"> Number of atoms in the seed</a> 
+</blockquote><blockquote>
+   <a href="#id3668139">  Lattice type</a> |
+    <a href="#id3668140"> Seed format</a>
+</blockquote><blockquote>
+  <a href="#id3668141">  Shift type</a> |
+   <a href="#id3668142"> Shift</a>
+</blockquote><blockquote>
+  <a href="#id3668143">  Seed coordinates</a> 
+</blockquote><p></p>
+
+<p><a name="id3667240"></a><a name="Rule file file:"></a></p><blockquote>
+*****************************************************
+<p><a>Input file 'rulefile':</a></p>
+   <a href="#id3668152">  Lattice type </a> 
+</blockquote><blockquote>
+   <a href="#id3668153"> Rule type</a>
+</blockquote><blockquote>
+   <a href="#id3668154"> Rule identity</a>
+</blockquote><p></p>
+
+
+    <a name="id3667248"></a><table style="margin-bottom: 20px;" width="100%" border="0">
+    <tbody><tr><th bgcolor="#ddcba6"><h2 style="margin: 10px 10px 10px 15px; text-align: left;"> 
+ Main input file input.dat </h2></th></tr>
+    <tr><td style="padding: 5px 5px 5px 30px; background: rgb(255, 235, 198) none repeat scroll 0% 0%; text-align: 
+   left; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: 
+   -moz-initial;"><table style="border: 0pt solid rgb(80, 80, 135); margin-bottom: 10px; table-layout: auto; width: 
+   700px;"><tbody><tr><td>
+
+
+     <a name="id3667252"></a><a name="seedfile"></a>
+        <table width="100%"> <tbody><tr>  <th valign="top" width="20%" align="left">
+    seedfile</th> <td style="text-align: left; vertical-align: top">
+    CHARACTER</td>  </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Name of the file containing the seed    
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a 
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3667553"></a><a name="rulefile"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    rulefile</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Name of the file containing the rule
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3667554"></a><a name="idimension"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    idimension</th>
+       <td style="text-align: left">
+    INTEGER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Dimension of the space. It must be equal to the Cdim variable specified in the makefile. It must be compatible with the 
+    lattice type: only the simple cubic lattice can be used with any dimension; honeycomb can be used only in 2 dimensions and 
+    the face-centered cubic lattice can only be used in 3 dimensions.  
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3667555"></a><a name="latticetype"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    latticetype</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Type of lattice. Accepted values are "sc" (simple cubic), "hc" (honeycomb), "fcc" (face-centered cubic). sc is compatible with any 
+    value of <a href="#id3667554">idimension</a>, while hc works only with <a href="#id3667554">idimension</a> = 2, and
+    fcc works only with <a href="#id3667554">idimension</a> =3. To ensure that the input files are consistent with each other, 
+    the lattice type must be specified also in the seed file and in the rule file. 
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+     <a name="id3667556"></a><a name="neighbourhood"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    neighbourhood</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Type of neighbourhood. Accepted values are "moore" and "vonneumann". 
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3667557"></a><a name="isize"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    isize</th>
+       <td style="text-align: left">
+    INTEGER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Size of the lattice. A simple cubic lattice in 3 dimensions has (isize X isize X isize) cells. fcc lattices are built from simple cubic 
+    lattices, cancelling half of the cells. Therefore an fcc lattice has (isize X isize X isize)/2 cells. An hc lattice is a 
+    simple cubic lattice with a modified neighbourhood, therefore it has (isize X isize) cells like the sc lattice. 
+    The code implements hard-wall boundary conditions, and the boundary cells always have the value of 0. For this reason, we recommend to 
+    take a size large enough so that the boundaries do not interfere with the center of the lattice.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+     
+     <a name="id3667558"></a><a name="nstep"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    nstep</th>
+       <td style="text-align: left">
+    INTEGER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Number of steps.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+  
+    <a name="id3667559"></a><a name="nprint"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    nprint</th>
+       <td style="text-align: left">
+    INTEGER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    The configuration is printed to file every nprint steps.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+
+**********************************************************
+<p><a>Seed file </a></p>
+<p><a> </a></p>
+<blockquote>
+<tbody><tr><td>
+
+    <a name="id3668138"></a><a name="natseed"></a>
+       <table width="100%"> <tbody><tr> <th valign="top" width="20%" align="left">
+    Numer of atoms in the seed</th> <td>
+    INTEGER</td> </tr>   <tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+       </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation"></div>
+  
+    <a name="id3668139"></a><a name="Latticetype"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    Lattice type</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    It must be consistent with the variable <a href="#id3667555">latticetype</a> in the main input file.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+
+     <a name="id3668140"></a><a name="Seed format"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    Seed format</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    The coordinates of the occupied cells in the seed can be given in two different formats, "indices" or "coord". Indices are 
+    Ndim integers (NDim is the dimension of the space), and works only for 'sc' (simple cubic) lattice type. Coord wants real-space 
+    coordinates, and accepts both integer and real numbers. The code performs a check that the points actually lie 
+    on the lattice type given in input. 
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3668141"></a><a name="Shift type"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    Shift type</th>
+       <td style="text-align: left">
+    CHARACTER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    The indices of the occupied cells in the seed can be shifted with respect to the actual coordinates provided in the 
+    seed file by using "shift type' and "shift". Shift type can be "manual" or "center". In the "manual" case, the 
+    indices of the seed are shifted by the integers indicated by "shift". In the case of "center", the seed is put in the centre 
+    of the simulation cell.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3668142"></a><a name="Shift"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    Shift</th>
+       <td style="text-align: left">
+    INTEGER</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    The indices of the occupied cells in the seed can be shifted with respect to the actual coordinates provided in the
+    seed file by using "shift type' and "shift". Shift is used only if Shift type is "manual". As many integers have to be provided 
+    as dimensions of the lattice.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3668143"></a><a name="Seed coordinates"></a>
+       <table width="100%"> <tbody><tr>
+       <th valign="top" width="20%" align="left">
+    Seed coordinates</th>
+       <td style="text-align: left">
+    INTEGER/REAL</td>
+        </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    The coordinates of the occupied cells in the seed, one cell per line. Coordinates are real numbers if 
+    <a href="#id3668140">Seed format</a> is "coord", are integers if <a href="#id3668140">Seed format</a> is "indices".
+    In the case of "coord", the code checks that the cells actually lie on the lattice declared in input.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+
+
+**********************************************************
+<p><a>Rule file </a></p>
+<p><a> </a></p>
+<blockquote>
+<tbody><tr><td>
+
+    <a name="id3668152"></a><a name="Latticetyperule"></a>
+       <table width="100%"> <tbody><tr> <th valign="top" width="20%" align="left">
+    Lattice type</th> <td>
+    CHARACTER</td> </tr>   
+       </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Type of lattice. It is present here as a check of consistency for the input. It must be equal to the 
+    <a href="#id3667555">type of lattice</a> specified in the main input and in the seed file (see there for more details).
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+     <a name="id3668153"></a><a name="Ruletype"></a>
+       <table width="100%"> <tbody><tr> <th valign="top" width="20%" align="left">
+    Rule type</th> <td>
+    CHARACTER</td> </tr>
+       </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    Type of rule. It can take the values "outer", "outer2", "totalistic", "alltotalistic", "allgrowth". The "generic" 
+    rule is not implemented yet. "outer" and "outer2" refer to an outer totalistic rule, and differ by the way in which the 
+    rule is specified. "outer" expects "Rule identity" to be a single integer, which corresponds to the C-tilde number 
+    defined in Packard and Wolfram, J Stat Phys 38, 901 (1985). "outer2" expects two lines of integers; in the first line, 
+    the value of the result is reported for number of occupied neighobouring cells from 0 to Nmax, when the central cell is empty; 
+    in the second line, the value of the result is reported for number of occupied neighobouring cells from 0 to Nmax, 
+    when the central cell is full. "totalistic" refers to a totalistic rule. "totalistic" expects "Rule identity" to be a single integer, 
+    which corresponds to the C number defined in Packard and Wolfram, J Stat Phys 38, 901 (1985). To specify a 
+    totalistic rule by giving its action on every configuration, one can in principle use outer2 with some care.
+    "alltotalistic" makes a cylce over all totalistic rules. It can be quite slow for large lattices, many dimensions. 
+    "allgrowth" makes a cycle over all outer totalistic rules that keep full cells full.
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+    <a name="id3668154"></a><a name="Rule identity"></a>
+       <table width="100%"> <tbody><tr> <th valign="top" width="20%" align="left">
+    Rule identity</th> <td>
+    INTEGER</td> </tr>
+       </td></tr><tr><td colspan="2" valign="top" align="left"><blockquote><pre>
+    It specifies the identity of the specific rule to be used. The specific form depends on the <a href="#id3668153">Rule type</a> 
+    (see there for more details).
+        </pre></blockquote></td></tr> </tbody></table><div align="right"><a name="calculation">[</a><a
+        href="#__top__">Back to Top</a>]</div>
+
+</blockquote>
+</td></tr>
+</tbody></table></td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+<blockquote><small>
+	  </small></blockquote>
+</body></html>

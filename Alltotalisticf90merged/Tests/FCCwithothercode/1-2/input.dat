@@ -12,6 +12,6 @@
     isize = 100
  /    
 &steps
-  nstep = 14
-  nprint = 14
+  nstep = 22
+  nprint = 22
  /
