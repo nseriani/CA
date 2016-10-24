@@ -174,7 +174,7 @@ SELECT CASE (CA_dom%D)
        st_suffix='nD'
 END SELECT
 
-write (cube_side, "(I3.3)") CA_dom%isize
+write (cube_side, "(I6.6)") CA_dom%isize
 filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'.'//TRIM(st_suffix)
 
 OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRITE")

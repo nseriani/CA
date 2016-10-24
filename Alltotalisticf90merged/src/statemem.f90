@@ -34,7 +34,7 @@ integer        :: i
 logical        :: isOccupied
 logical        :: file_exist
 character(len=100)  :: filename
-character(len=100)  :: cube_side
+character(len=1024)  :: cube_side
 character(len=1024)  :: rule_name
 character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
 
@@ -51,7 +51,7 @@ SELECT CASE (CA_dom%D)
        st_suffix='nD'
 END SELECT
 
-write (cube_side, "(I3.3)") CA_dom%isize
+write (cube_side, "(I6.6)") CA_dom%isize
 write (rule_name, "(I15.15)") CA_rule%icrule
 
 filename =  '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)//'_r'//TRIM(rule_name)//'_state.'//TRIM(st_suffix)
