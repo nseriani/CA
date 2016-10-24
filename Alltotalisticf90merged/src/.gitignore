@@ -1,4 +1,8 @@
 *.o
 *.mod
 *.x
+*.xy
 *.xyz
+allocate_array.h
+define_array.h
+input.dat
