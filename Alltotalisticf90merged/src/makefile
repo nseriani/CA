@@ -49,6 +49,7 @@ LIBTRAJ = 	latticemem.o \
 		seedmem.o \
 		stepmem.o \
                 globalmem.o \
+		diagnostics.o\
                 scvonneumann.o \
                 cellular.o \
                 scmoore.o\
