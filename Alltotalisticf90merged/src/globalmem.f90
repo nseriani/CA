@@ -4,7 +4,7 @@
 
 module globalmem
 
-       integer :: nstep, nprint
+       integer :: nstep, nprint, ndiagno
 
 contains
 
@@ -19,7 +19,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
       character(100)       :: filein,seedfile, rulefile, neighbourhood 
       character(3)         :: latticetype,latticetyper
       integer              :: idimension,isize
-      integer              :: nstep, nprint
+      integer              :: nstep, nprint, ndiagno
       type(domain)         :: CA_dom
       type(seed  )         :: CA_seed
       type(state )         :: CA_state
@@ -27,7 +27,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
 
       namelist /files/ seedfile, rulefile
       namelist /lattice/ idimension, latticetype, neighbourhood, isize
-      namelist /steps/ nstep, nprint
+      namelist /steps/ nstep, nprint, ndiagno
 
 !   Set some default values: 3 dimensions, simple cubic lattice, Moore's neighbourhood 
       CA_dom%latticetype   ='sc'
@@ -36,6 +36,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
 
       nstep = 10
       nprint = 10
+      ndiagno = 10
 
 !    Read main input, with information on lattice, rule, number of iterations, output options 
       open(11,file=TRIM(filein))
@@ -64,6 +65,7 @@ subroutine init_global(filein,CA_dom, CA_state, CA_seed, CA_rule)
 
        CA_step%nstep = nstep
        CA_step%nprint = nprint
+       CA_step%ndiagno = ndiagno
 
       close(11)
 

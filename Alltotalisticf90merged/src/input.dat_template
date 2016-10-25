@@ -14,4 +14,5 @@
 &steps
   nstep = 14
   nprint = 14
+  ndiagno = 14
  /
