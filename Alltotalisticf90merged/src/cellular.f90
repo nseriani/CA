@@ -36,7 +36,7 @@
          enddo
 
       elseif(CA_rule%ruletype.eq.'allgrowth') then
-         write(*,*) 'WARNING: All growth not tested!' 
+!         write(*,*) 'WARNING: All growth not tested!' 
 
          CA_rule%ruletype = 'outer'
 
@@ -52,27 +52,30 @@
 !! This definition must be kept compatible with ictilde definition in rulemem
 !! and with CA dynamics as described in update.f90 for outer totalistic rules
 
-           do j=0, CA_dom%nneigh 
+! This condition is designed to avoid appearance of full cells from vacuum, i.e. without full neighbours
+           if(ibits(i2, 0 ,1).eq.0) then
+
+
+             do j=0, CA_dom%nneigh 
             
-            CA_rule%ictilde=CA_rule%ictilde + ibits(i2, j ,1)*(2**(2*j))
-            CA_rule%ictilde=CA_rule%ictilde + (2**(2*j+1))
+              CA_rule%ictilde=CA_rule%ictilde + ibits(i2, j ,1)*(2**(2*j))
+              CA_rule%ictilde=CA_rule%ictilde + (2**(2*j+1))
 
+             enddo
+              write(*,*) 'rule: Ctilde = ', CA_rule%ictilde
+              CA_rule%icrule = CA_rule%ictilde
+
+             CA_state%ipopulation = CA_state%ipopulation0
+
+             do i =1, CA_step%nstep
+
+               call update(CA_dom,CA_state, CA_rule)
+               if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
+               if(mod(i,CA_step%ndiagno).eq.0)  call dump_diagnostics(CA_dom,CA_state,CA_rule)
+
+             enddo
+           endif
            enddo
-            write(*,*) 'rule: Ctilde = ', CA_rule%ictilde
-            CA_rule%icrule = CA_rule%ictilde
-
-           CA_state%ipopulation = CA_state%ipopulation0
-
-           do i =1, CA_step%nstep
-
-             call update(CA_dom,CA_state, CA_rule)
-             if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
-             if(mod(i,CA_step%ndiagno).eq.0)  call dump_diagnostics(CA_dom,CA_state,CA_rule)
-
-           enddo
-
-         enddo
- 
       else
 
         do i =1, CA_step%nstep 
