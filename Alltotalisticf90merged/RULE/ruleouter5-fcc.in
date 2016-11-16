@@ -1,0 +1,5 @@
+ fcc        Lattice type
+ outer2     Type of rule: generic, totalistic, outer (totalistic), outer2 (totalistic)
+ 1 1 1 1 1 1 1 1 1 1 1 1 1        For outer2, the result for n=0,1,2,...,NN is specified 1) when the i is empty
+ 1 1 1 1 1 1 1 1 1 1 1 1 1     the result for n=0,1,2,...,NN is specified 2) when the i is filled
+ 
