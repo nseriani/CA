@@ -50,6 +50,7 @@ LIBTRAJ = 	latticemem.o \
 		stepmem.o \
                 globalmem.o \
 		diagnostics.o\
+		calc_surface.o\
                 scvonneumann.o \
                 cellular.o \
                 scmoore.o\

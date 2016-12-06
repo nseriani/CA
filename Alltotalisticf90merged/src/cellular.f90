@@ -29,7 +29,8 @@
              
              call update(CA_dom,CA_state, CA_rule)
              if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
-             if(mod(i,CA_step%ndiagno).eq.0)  call dump_diagnostics(CA_dom,CA_state,CA_rule)
+             if(mod(i,CA_step%ndiagno).eq.0) call dump_diagnostics(CA_dom,CA_state,CA_rule)
+             if(mod(i,CA_step%ndiagno).eq.0) call calc_state_surface(CA_dom,CA_state,CA_rule)
 
            enddo 
             
@@ -72,6 +73,7 @@
                call update(CA_dom,CA_state, CA_rule)
                if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
                if(mod(i,CA_step%ndiagno).eq.0)  call dump_diagnostics(CA_dom,CA_state,CA_rule)
+               if(mod(i,CA_step%ndiagno).eq.0) call calc_state_surface(CA_dom,CA_state,CA_rule)
 
              enddo
            endif
@@ -83,6 +85,7 @@
          call update(CA_dom,CA_state, CA_rule)
          if(mod(i,CA_step%nprint).eq.0)  call dump_state(CA_dom,CA_state,CA_rule)
           if(mod(i,CA_step%ndiagno).eq.0)  call dump_diagnostics(CA_dom,CA_state,CA_rule)
+         if(mod(i,CA_step%ndiagno).eq.0) call calc_state_surface(CA_dom,CA_state,CA_rule)
 
         enddo
       endif
