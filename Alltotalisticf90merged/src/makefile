@@ -17,7 +17,7 @@ IMOPTFLAGS = -g0
 IDEBUGFLAGS = -g -C -debug extended -debug inline_debug_info -traceback 
 IFC = ifort 
 ILDFLAGS = #-lg2c
-Cdim = 3
+Cdim = 2
 #
 
 SETARCH = LAPTOP
