@@ -171,45 +171,54 @@ type(rule  )            :: CA_rule
 
 integer  :: i,k,j,tot_filled,counter
 integer  :: near_n_idx(2*CA_dom%D)
-integer  :: collect_near_n(2*CA_dom%D+1)
+integer  :: collect_near_n_fn(2*CA_dom%D+1)
+integer  :: collect_near_n(CA_dom%nneigh)
 integer  :: rule_surface
 
-call fromAny_2_FN(CA_dom,near_n_idx)
+  SELECT CASE (TRIM(CA_dom%latticetype))
 
-do i=1, CA_dom%s
+      CASE('sc')
+          call fromAny_2_FN(CA_dom,near_n_idx)
 
-  collect_near_n(1) = CA_state%ipopulation(i)
+          do i=1, CA_dom%s
 
-  do j=1,2*CA_dom%D!CA_dom%nneigh
+             collect_near_n_fn(1) = CA_state%ipopulation(i)
+
+             do j=1,2*CA_dom%D!CA_dom%nneigh
    
-     k = near_n_idx(j)
+                k = near_n_idx(j)
 
-     collect_near_n(j+1) = CA_state%ipopulation(CA_dom%neighlist(i,k))
+                collect_near_n_fn(j+1) = CA_state%ipopulation(CA_dom%neighlist(i,k))
      
-  enddo
+             enddo
 
-! counter = 2
+          CA_state%ipop(i) = rule_surface(CA_dom, collect_near_n_fn)
 
-! do k=1,CA_dom%nneigh/2,2
+          enddo
 
-!    collect_near_n(counter) = CA_state%ipopulation(CA_dom%neighlist(i,k+1))
+      CASE('hc','fcc')
+          do i=1, CA_dom%s
 
-!    counter = counter + 1 
+             collect_near_n(1) = CA_state%ipopulation(i)
 
-! enddo
+             do j=1,CA_dom%nneigh
 
-! do k=5,CA_dom%nneigh,2
+                collect_near_n(j+1) = CA_state%ipopulation(CA_dom%neighlist(i,j))
 
-!    collect_near_n(counter) = CA_state%ipopulation(CA_dom%neighlist(i,k))
+             enddo
 
-!    counter = counter + 1 
+          CA_state%ipop(i) = rule_surface(CA_dom, collect_near_n)
 
-! enddo
+          enddo
 
-  CA_state%ipop(i) = rule_surface(CA_dom, collect_near_n)
+      CASE DEFAULT
 
-enddo
+           write(*,*) 'Lattice: '//TRIM(CA_dom%latticetype)//' not implemented' 
+           STOP 
 
+   END SELECT
+
+          
 CA_state%ipopulation = CA_state%ipop
 
 end subroutine

@@ -170,8 +170,9 @@ CA_state_in%ipop = CA_state_in%ipopulation
            SELECT CASE (TRIM(CA_dom%neighbourhood))
 
               CASE('vonneumann')
-                  write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
-                  STOP 
+                  call fill_state_fcc(CA_dom,CA_state_in)
+!                 write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
+!                 STOP 
 
               CASE DEFAULT
                   write(*,*) 'Scheme: '//TRIM(CA_dom%latticetype)//'-'//TRIM(CA_dom%latticetype)//' not implemented'
@@ -284,6 +285,63 @@ do i=1,CA_dom%S
       endif
 
 enddo
+
+do i=1,CA_dom%S
+   CA_state_in%ipopulation(i) = CA_state_in%ipop(i)
+enddo
+
+end subroutine
+
+subroutine fill_state_fcc(CA_dom,CA_state_in)
+use latticemem
+use rulemem
+implicit none
+type(domain), intent(in)      :: CA_dom
+type(state ), intent(inout)   :: CA_state_in
+!     Local variables
+integer i,j,k,d,counter
+integer a,b
+logical check
+integer simmetry_matrix(CA_dom%nneigh/2,2) 
+
+counter = 1
+
+do k=1,CA_dom%nneigh
+   a = CA_dom%neighlist(CA_dom%S/2,k)
+
+     do j=1,CA_dom%nneigh
+
+         b = CA_dom%neighlist(CA_dom%S/2,j)
+         check = .TRUE.
+         do d=1, CA_dom%D 
+            if (CA_dom%v1DtoND(a,d) .NE. -CA_dom%v1DtoND(b,d))  check = .FALSE.
+         enddo
+
+         if (check) then
+            simmetry_matrix(counter,1)=k
+            simmetry_matrix(counter,2)=j
+            counter = counter +1
+         endif
+   enddo
+
+   if (counter .GT. CA_dom%nneigh/2) exit
+
+enddo
+
+do i=1,CA_dom%S
+   do k=1,CA_dom%nneigh/2
+
+         a = CA_dom%neighlist(i,simmetry_matrix(k,1))
+         b = CA_dom%neighlist(i,simmetry_matrix(k,2))
+
+         if ( (CA_state_in%ipopulation(a) .EQ. 1) .AND. ( CA_state_in%ipopulation(b) .EQ.  1) ) then
+            CA_state_in%ipop(i)=1
+            exit
+         endif
+   enddo
+
+enddo
+
 
 do i=1,CA_dom%S
    CA_state_in%ipopulation(i) = CA_state_in%ipop(i)

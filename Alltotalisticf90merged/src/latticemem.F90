@@ -249,5 +249,100 @@ endif
 
 end subroutine
 
+subroutine save_lattice(CA_dom)
+implicit none
+!local variables
+type(domain)   :: CA_dom
+integer        :: i,j
+character(len=1024)  :: filename
+character(len=1024)  :: cube_side
+character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+
+SELECT CASE (CA_dom%D)
+   CASE(1)
+       st_suffix='x'
+   CASE(2)
+       st_suffix='xy'
+   CASE(3)
+       st_suffix='xyz'
+   CASE(4)
+       st_suffix='xyzt'
+   CASE DEFAULT
+       st_suffix='nD'
+END SELECT
+
+write (cube_side, "(I6.6)") CA_dom%isize
+filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'.save.'//TRIM(st_suffix)
+
+OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="REPLACE",ACTION="WRITE")
+
+    write(unit=333,FMT=*) CA_dom%isize
+    write(unit=333,FMT=*) CA_dom%S
+    write(unit=333,FMT=*) CA_dom%latticetype
+    write(unit=333,FMT=*) CA_dom%neighbourhood
+    write(unit=333,FMT=*) CA_dom%checkseed
+    write(unit=333,FMT=*) CA_dom%shiftby1
+    write(unit=333,FMT=*) CA_dom%nneigh
+    do i=1,CA_dom%S
+        write(unit=333,FMT=*) CA_dom%v1DtoND(i,:)
+    enddo
+    do i=1,CA_dom%S
+        write(unit=333,FMT=*) CA_dom%neighlist(i,:)
+    enddo
+
+CLOSE(UNIT=333)
+
+end subroutine
+
+subroutine read_lattice(CA_dom)
+implicit none
+!local variables
+type(domain)   :: CA_dom
+integer        :: i,j
+character(len=1024)  :: filename
+character(len=1024)  :: cube_side
+character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+
+SELECT CASE (CA_dom%D)
+   CASE(1)
+       st_suffix='x'
+   CASE(2)
+       st_suffix='xy'
+   CASE(3)
+       st_suffix='xyz'
+   CASE(4)
+       st_suffix='xyzt'
+   CASE DEFAULT
+       st_suffix='nD'
+END SELECT
+
+write (cube_side, "(I6.6)") CA_dom%isize
+filename =  TRIM(CA_dom%latticetype)//TRIM(cube_side)//'.save.'//TRIM(st_suffix)
+
+OPEN(UNIT=333,FILE=TRIM(filename),FORM="FORMATTED",STATUS="OLD",ACTION="READ")
+
+    read(unit=333,FMT=*) CA_dom%isize
+    read(unit=333,FMT=*) CA_dom%S
+    read(unit=333,FMT=*) CA_dom%latticetype
+    read(unit=333,FMT=*) CA_dom%neighbourhood
+    read(unit=333,FMT=*) CA_dom%checkseed
+    read(unit=333,FMT=*) CA_dom%shiftby1
+    read(unit=333,FMT=*) CA_dom%nneigh
+
+    allocate(CA_dom%v1DtoND(CA_dom%S, CA_dom%D))
+
+    do i=1,CA_dom%S
+        read(unit=333,FMT=*) CA_dom%v1DtoND(i,:)
+    enddo
+    
+    allocate(CA_dom%neighlist(CA_dom%S,CA_dom%nneigh))
+
+    do i=1,CA_dom%S
+        read(unit=333,FMT=*) CA_dom%neighlist(i,:)
+    enddo
+
+CLOSE(UNIT=333)
+
+end subroutine
 
 end module

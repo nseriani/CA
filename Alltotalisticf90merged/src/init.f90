@@ -22,14 +22,20 @@
 
 !   Initailize the mapping 1D <--> ND and the corresponding nearneihgbour vector
 
-    call allocate_dom(CA_dom)
+    if (.FALSE.) then
+       call allocate_dom(CA_dom)
 
-    call check_lattice_vs_seed(CA_dom,CA_seed%seedfile)
+       call check_lattice_vs_seed(CA_dom,CA_seed%seedfile)
 
-    call compute_nearneighbour(CA_dom)
+       call compute_nearneighbour(CA_dom)
 
-    call dump_lattice(CA_dom)
+       call save_lattice(CA_dom)
 
+    else
+
+       call read_lattice(CA_dom)
+
+    endif
 !   Initailize state
 
     call init_state(CA_dom,CA_state)  
