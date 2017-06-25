@@ -34,7 +34,8 @@ do  i=1,2*CA_dom%s
 
 enddo
 
-call dump_state_surface(CA_dom,CA_state_surf,CA_rule)
+!call dump_state_surface(CA_dom,CA_state_surf,CA_rule)
+call dump_state_surface_bin_2D(CA_dom,CA_state_surf,CA_rule)
 
 end subroutine
 
@@ -423,3 +424,98 @@ CLOSE(UNIT=333)
 
 end subroutine
 
+subroutine dump_state_surface_bin_2D(CA_dom,CA_state,CA_rule)
+use latticemem
+use statemem
+use rulemem
+implicit none
+type(domain)   :: CA_dom
+type(state )   :: CA_state
+type(rule  )   :: CA_rule
+!local variables
+integer        :: i,counter
+integer        :: Noccupied
+integer,allocatable  :: occupied(:,:)
+logical        :: isOccupied
+logical        :: file_exist
+character(len=100)  :: filename,filename00,filename01
+character(len=1024)  :: cube_side
+character(len=1024)  :: rule_name
+character(len=1024)  :: frame
+character(len=10)    :: st_suffix ! state file suffix x,xy,xyz,xyzt,nD
+
+SELECT CASE (CA_dom%D)
+   CASE(1)
+       st_suffix='x'
+   CASE(2)
+       st_suffix='xy'
+   CASE(3)
+       st_suffix='xyz'
+   CASE(4)
+       st_suffix='xyzt'
+   CASE DEFAULT
+       st_suffix='nD'
+END SELECT
+
+write (cube_side, "(I6.6)") CA_dom%isize
+write (frame, "(I6.6)") frame_surf_count
+write (rule_name, "(I15.15)") CA_rule%icrule
+
+filename00 = '../OUTPUT/'//TRIM(CA_dom%latticetype)//'_'//TRIM(cube_side)
+filename01 = '_r'//TRIM(rule_name)//'_f'//TRIM(frame)//'_state_surface.'//TRIM(st_suffix)
+filename   = TRIM(filename00)//TRIM(filename01)
+
+OPEN(UNIT=333,FILE=TRIM(filename),FORM="UNFORMATTED",STATUS="REPLACE",ACTION="WRITE")
+
+    Noccupied = 0
+    do i=1,CA_dom%S
+
+       if  (CA_state%ipopulation(i) .EQ. 2) Noccupied = Noccupied +1
+       
+    enddo
+
+allocate(occupied(Noccupied,2))
+
+counter = 1
+
+SELECT CASE (CA_dom%latticetype)
+
+     CASE('hc')
+         if ( allocated(examap))        deallocate(examap)
+         if ( allocated(v_aux))         deallocate(v_aux)
+         allocate(examap(CA_dom%S,2))
+         allocate(v_aux(CA_dom%S))
+         examap = 0.
+         v_aux  = .FALSE.
+         call create_exa(CA_dom,1,0.,0.)
+         do i=1,CA_dom%S
+             isOccupied = (CA_state%ipopulation(i) .EQ. 2)
+             if (isOccupied) then
+                 occupied(counter,1)= int ( examap(i,1) )
+                 occupied(counter,2)= int ( examap(i,2) )
+                 counter = counter +1
+             endif
+         enddo
+
+     CASE DEFAULT
+
+         do i=1,CA_dom%S
+             isOccupied = (CA_state%ipopulation(i) .EQ. 2)
+             if (isOccupied) then
+                 occupied(counter,1)= int( CA_dom%v1DtoND(i,1) )
+                 occupied(counter,2)= int( CA_dom%v1DtoND(i,2) )
+                 counter = counter +1
+             endif
+         enddo
+
+END SELECT
+
+write(unit=333) occupied
+
+CLOSE(UNIT=333)
+
+deallocate(occupied)
+
+frame_surf_count = frame_surf_count + 1
+
+end subroutine

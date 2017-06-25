@@ -9,8 +9,8 @@ SHELL = /bin/bash
 
 
 GFC = gfortran
-GOPTFLAGS = -ffast-math -funroll-loops -O3
-GDEBUGFLAGS = -Wall -g  -C -DEBUG -fbounds-check
+GOPTFLAGS = -ffast-math -funroll-loops -O3 
+GDEBUGFLAGS = -Wall -g -C -DEBUG -fbounds-check
 #####-Wall -g  -C -DEBUG -fbounds-check
 IOPTFLAGS = -O3 -ipo -static-libcxa
 IMOPTFLAGS = -g0 
