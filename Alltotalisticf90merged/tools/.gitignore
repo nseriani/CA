@@ -1,2 +1,6 @@
 *.pyc
 *.png
+*.pkl
+job.pbs.e*
+job.pbs.o*
+*.nc
